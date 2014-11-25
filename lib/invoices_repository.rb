@@ -1,4 +1,12 @@
+require_relative 'MetaRepository'
+
 class InvoicesRepository < MetaRepository
+
+  def initialize(filename)
+    CSV.open(filename, headers: true, header_converters: :symbol)
+  end
+
+  
 
   def transactions
     # returns a collection of associated Transaction instances

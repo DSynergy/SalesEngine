@@ -14,7 +14,7 @@ def customers_with_pending_invoices
   #customers_with_pending_invoices returns a collection of Customer instances which have pending (unpaid) invoices. An invoice is considered pending if none of it’s transactions are successful.
 end
 
-Merchant extension
+# Merchant extension
 
 # revenue(range_of_dates) returns the total revenue for that merchant across several dates
 

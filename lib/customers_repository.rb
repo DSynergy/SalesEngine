@@ -1,4 +1,11 @@
+require_relative 'MetaRepository'
+
 class CustomersRepository < MetaRepository
+
+def initialize(filename)
+  CSV.open(filename, headers: true, header_converters: :symbol)
+end
+
 
   def invoices
     # returns a collection of Invoice instances associated with this object.end
@@ -13,3 +20,7 @@ class CustomersRepository < MetaRepository
 
 
 end
+
+
+
+# path = File.join(__dir__, filename)
