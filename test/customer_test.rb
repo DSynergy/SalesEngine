@@ -4,7 +4,7 @@ require '../lib/customer'
 class CustomerTest < Minitest::Test
 
   def test_has_attributes
-    data = {id: 42, first_name: "Billy", last_name: "Bob",
+    data = {id: "42", first_name: "Billy", last_name: "Bob",
     created_at: "12:01", updated_at: "12:02"}
 
     customer = Customer.new(data)
