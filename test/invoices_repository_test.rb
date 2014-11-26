@@ -1,10 +1,12 @@
 require_relative 'test_helper'
+require '../lib/csv_handler'
+require '../lib/invoices_repository'
 
-class InvoiceRepositoryTest < Minitest::Test
+class InvoicesRepositoryTest < Minitest::Test
 
   def repository
     rows = CSVHandler.load("../data/fixtures/invoices.csv")
-    repository = InvoiceRepository.new("engine", rows)
+    repository = InvoicesRepository.new("engine", rows)
   end
 
   def test_it_can_load_invoices

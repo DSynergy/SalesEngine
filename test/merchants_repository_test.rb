@@ -1,10 +1,12 @@
 require_relative 'test_helper'
+require '../lib/csv_handler'
+require '../lib/merchants_repository'
 
-class MerchantRepositoryTest < Minitest::Test
+class MerchantsRepositoryTest < Minitest::Test
 
   def merchant_repository
     rows = CSVHandler.load("../data/fixtures/merchants.csv")
-    merchant_repository = MerchantRepository.new("engine", rows)
+    merchant_repository = MerchantsRepository.new("engine", rows)
   end
 
   def test_it_loads_the_repo

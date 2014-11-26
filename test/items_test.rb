@@ -1,4 +1,5 @@
 require_relative 'test_helper'
+require '../lib/items'
 
 class ItemsTest < Minitest::test
     def test_has_attributes
@@ -6,7 +7,7 @@ class ItemsTest < Minitest::test
       unit_price: "80000", merchant_id: 1,
       created_at: "11:45", updated_at: "10:07"}
 
-      item = Item.new(data, self)
+      item = Items.new(data, self)
 
       assert_equal 540, item.id
       assert_equal "box", item.name

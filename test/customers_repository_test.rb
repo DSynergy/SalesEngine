@@ -1,10 +1,12 @@
 require_relative 'test_helper'
+require '../lib/csv_handler'
+require '../lib/customers_repository'
 
-class CustomerRepositoryTest < Minitest::Test
+class CustomersRepositoryTest < Minitest::Test
 
-  def customer_repository
+  def setup
     rows = CSVHandler.load("../data/fixtures/customers.csv")
-    repository = CustomerRepository.new("engine", rows)
+    @repository = CustomersRepository.new("engine", rows)
   end
 
   def test_it_loads_items

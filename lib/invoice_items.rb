@@ -1,4 +1,4 @@
-class Invoice
+class InvoiceItems
 
 
 end

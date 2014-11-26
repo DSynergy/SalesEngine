@@ -1,10 +1,12 @@
 require_relative 'test_helper'
+require '../lib/csv_handler'
+require '../lib/items_repository'
 
-class ItemRepositoryTest < Minitest::Test
+class ItemsRepositoryTest < Minitest::Test
 
   def item_repository
     rows = CSVHandler.load("../data/fixtures/items.csv")
-    item_repository = ItemRepository.new('engine', rows)
+    item_repository = ItemsRepository.new('engine', rows)
   end
 
   def test_it_can_load_a_repository

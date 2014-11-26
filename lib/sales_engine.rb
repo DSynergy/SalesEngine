@@ -1,20 +1,20 @@
 require 'csv'
 require 'bigdecimal'
 require 'time'
-require_relative 'merchants'
+require_relative 'merchant'
 require_relative 'merchants_repository'
-require_relative 'customers'
+require_relative 'customer'
 require_relative 'customers_repository'
-require_relative 'invoice_items'
+require_relative 'invoice_item'
 require_relative 'invoice_items_repository'
-require_relative 'invoices'
+require_relative 'invoice'
 require_relative 'invoices_repository'
-require_relative 'items'
+require_relative 'item'
 require_relative 'items_repository'
 require_relative 'metarepository'
-require_relative 'transactions'
+require_relative 'transaction'
 require_relative 'transactions_repository'
-require_relative 'CSV_handler'
+include CSVHandler
 
 
 class SalesEngine
@@ -26,39 +26,29 @@ class SalesEngine
               :transactions_repository
 
   def initialize
-    # startup(dir)
-    @customers_repository ||= CSVHandler.customers_repository
-    @invoices_repository ||= CSVHandler.invoices_repository
-    @invoice_items_repository ||= CSVHandler.invoice_items_repository
-    @items_repository ||= CSVHandler.items_repository
-    @merchants_repository ||= CSVHandler.merchants_repository
-    @transactions_repository ||= CSVHandler.transactions_repository
+    @customer_data ||= CSVHandler.load_file('../data/customers.csv')
+    @invoices_data ||= CSVHandler.load_file('../data/invoices.csv')
+    @invoice_items_data ||= CSVHandler.load_file('../data/invoice_items.csv')
+    @items_data ||= CSVHandler.load_file('../data/items.csv')
+    @merchants_data ||= CSVHandler.load_file('../data/merchants.csv')
+    @transactions_data ||= CSVHandler.load_file('../data/transactions.csv')
+    CustomerRepository.build_customers(@customer_data)
   end
 
   def startup
+    @customers_repository =  CustomerRepository.new(@customer_data)
 
+    @invoices_repository = InvoicesRepository.new(@invoices_data )
+    @invoice_items_repository = InvoiceItemsRepository.new(@invoice_items_data)
+    @items_repository = ItemsRepository.new(@items_data)
+    @merchants_repository = MerchantsRepository.new(@merchants_data)
+    @transactions_repository = TransactionsRepository.new(@transactions_data)
   end
 
-engine = SalesEngine.new
-engine.startup
+
 
 
 end
 
-
-
-# class SalesEngine
-#   attr_reader :customer_repository, :invoice_repository, :invoice_item_repository, :item_repository, :merchant_repository, :transaction_repository
-#   def initialize(dir="./data")
-#     startup(dir)
-#     @customer_repository ||= Database.customer_repository
-#     @invoice_repository ||= Database.invoice_repository
-#     @invoice_item_repository ||= Database.invoice_item_repository
-#     @item_repository ||= Database.item_repository
-#     @merchant_repository ||= Database.merchant_repository
-#     @transaction_repository ||= Database.transaction_repository
-#   end
-#   def startup(dir)
-#     Database.startup(dir)
-#   end
-# end
+engine = SalesEngine.new
+engine.startup

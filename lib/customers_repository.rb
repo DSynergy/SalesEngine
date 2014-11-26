@@ -2,9 +2,15 @@ require_relative 'MetaRepository'
 
 class CustomersRepository < MetaRepository
 
-def initialize(filename)
-  CSV.open(filename, headers: true, header_converters: :symbol)
-end
+  def initialize(customers)
+    @customers = customers
+  end
+
+
+  def self.build_customers(data)
+    customer_objects = data.map { |row| Customer.new(row)}
+    new => self.new
+  end
 
 
   def invoices

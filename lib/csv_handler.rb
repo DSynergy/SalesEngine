@@ -1,39 +1,26 @@
 require 'csv'
 
-class CSVHandler
+module CSVHandler
 
-  attr_accessor :customers_repository,
-                :invoices_repository,
-                :invoice_items_repository,
-                :items_repository,
-                :merchants_repository,
-                :transactions_repository
+  # attr_accessor :customers_repository,
+  #               :invoices_repository,
+  #               :invoice_items_repository,
+  #               :items_repository,
+  #               :merchants_repository,
+  #               :transactions_repository
 
-  attr_reader :data
-
-  def initialize
-    @customers_repository = CustomersRepository.new('customers.csv')
-    @invoices_repository = InvoicesRepository.new('invoices.csv')
-    @invoice_items_repository = InvoiceItemsRepository.new('invoice_items.csv')
-    @items_repository = ItemsRepository.new('items.csv')
-    @merchants_repository = MerchantsRepository.new('merchants.csv')
-    @transactions_repository = TransactionsRepository.new('transactions.csv')
+  def initialize(filename)
+    CSV.open(filename, headers: true, header_converters: :symbol)
   end
 
-    def load_file(filename="/event_attendees.csv")
-      path = File.join(__dir__, filename)
-      @contents = CSV.read(path, headers: true, header_converters: :symbol)
-      @messages.file_load
-    end
 
+  def build_merchants
 
-    def initialize(filename = 'garbage.csv', queue)
-      @path = File.join('./bin/', filename)
-      @queue = queue
-    end
+  end
+
 end
-#
-#
+
+
 #       def startup(dir)
 #         load_data(dir)
 #       end
