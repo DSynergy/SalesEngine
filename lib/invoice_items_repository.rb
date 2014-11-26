@@ -1,12 +1,19 @@
 require_relative 'MetaRepository'
 
 class InvoiceItemsRepository < MetaRepository
+  attr_reader :invoice_items
 
-  def initialize(filename)
-    CSV.open(filename, headers: true, header_converters: :symbol)
+  def initialize(invoice_items)
+    @invoice_items = invoices_items
   end
 
-  
+  def self.build_invoice_items(data)
+    invoice_item_objects = data.map do |row|
+      InvoiceItem.new(row)
+    end
+    self.new(invoice_item_objects)
+  end
+
 
   def invoice
     # returns an instance of Invoice associated with this object

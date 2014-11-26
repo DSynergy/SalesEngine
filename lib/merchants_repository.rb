@@ -1,12 +1,20 @@
 require_relative 'MetaRepository'
 
 class MerchantsRepository < MetaRepository
+  attr_reader :merchant
 
-  def initialize(filename)
-    CSV.open(filename, headers: true, header_converters: :symbol)
+  def initialize(merchants)
+    @merchants = merchants
   end
 
-  
+  def self.build_merchants(data)
+    merchant_objects = data.map do |row|
+      Merchant.new(row)
+    end
+    self.new(merchant_objects)
+  end
+
+
 
   def items
     # Returns a collection of Item instances associated with that merchant for the products they sell

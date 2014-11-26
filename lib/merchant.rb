@@ -1,4 +1,4 @@
-class Merchants
+class Merchant
 
 def revenue(date)
   #revenue returns the total revenue for that merchant across all transactions

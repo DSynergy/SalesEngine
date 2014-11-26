@@ -26,23 +26,22 @@ class SalesEngine
               :transactions_repository
 
   def initialize
-    @customer_data ||= CSVHandler.load_file('../data/customers.csv')
-    @invoices_data ||= CSVHandler.load_file('../data/invoices.csv')
-    @invoice_items_data ||= CSVHandler.load_file('../data/invoice_items.csv')
-    @items_data ||= CSVHandler.load_file('../data/items.csv')
-    @merchants_data ||= CSVHandler.load_file('../data/merchants.csv')
-    @transactions_data ||= CSVHandler.load_file('../data/transactions.csv')
-    CustomerRepository.build_customers(@customer_data)
+    @customer_data ||= CSVHandler.new("./data/customer.csv")
+    @invoice_data ||= CSVHandler.new('./data/invoices.csv')
+    @invoice_item_data ||= CSVHandler.new('./data/invoice_items.csv')
+    @item_data ||= CSVHandler.new('./data/items.csv')
+    @merchant_data ||= CSVHandler.new('./data/merchants.csv')
+    @transaction_data ||= CSVHandler.new('./data/transactions.csv')
+
   end
 
   def startup
-    @customers_repository =  CustomerRepository.new(@customer_data)
-
-    @invoices_repository = InvoicesRepository.new(@invoices_data )
-    @invoice_items_repository = InvoiceItemsRepository.new(@invoice_items_data)
-    @items_repository = ItemsRepository.new(@items_data)
-    @merchants_repository = MerchantsRepository.new(@merchants_data)
-    @transactions_repository = TransactionsRepository.new(@transactions_data)
+    @customers_repository = CustomersRepository.build_customers(@customer_data)
+    @invoices_repository = InvoicesRepository.build_invoices(@invoice_data)
+    @invoice_items_repository = InvoiceItemsRepository.build_invoice_items(@invoice_item_data)
+    @transactions_repository = TransactionsRepository.build_transactions(@transaction_data)
+    @merchants_repository = MerchantsRepository.build_merchants(@merchant_data)
+    @items_repository = ItemsRepository.build_items(@item_data)
   end
 
 

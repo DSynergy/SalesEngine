@@ -1,6 +1,6 @@
 require 'csv'
 
-module CSVHandler
+class CSVHandler
 
   # attr_accessor :customers_repository,
   #               :invoices_repository,
@@ -14,9 +14,6 @@ module CSVHandler
   end
 
 
-  def build_merchants
-
-  end
 
 end
 

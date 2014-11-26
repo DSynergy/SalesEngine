@@ -1,7 +1,7 @@
 require_relative 'test_helper'
 require '../lib/customer'
 
-class CustomersTest < Minitest::Test
+class CustomerTest < Minitest::Test
 
   def test_has_attributes
     data = {id: 42, first_name: "Billy", last_name: "Bob",

@@ -1,14 +1,14 @@
 require_relative 'test_helper'
-require '../lib/merchants'
+require '../lib/merchant'
 
-class MerchantsTest < Minitest::test
+class MerchantTest < Minitest::test
   attr_reader :merchant, :repository
 
   def attributes_setup
     data = {id: 4, name: "Cummings-Thiel", created_at: "2012-03-27 14:53:59 UTC",
       updated_at: "2012-03-27 14:53:59 UTC"}
     @repository = Minitest::Mock.new
-    @merchant = Merchants.new(data, repository)
+    @merchant = Merchant.new(data, repository)
   end
 
   def test_has_attributes

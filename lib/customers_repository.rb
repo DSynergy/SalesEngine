@@ -1,15 +1,17 @@
-require_relative 'MetaRepository'
+require_relative 'MetaRepository'  # => true
 
 class CustomersRepository < MetaRepository
+ attr_reader :customer
 
   def initialize(customers)
     @customers = customers
   end
 
-
   def self.build_customers(data)
-    customer_objects = data.map { |row| Customer.new(row)}
-    new => self.new
+    customer_objects = data.map do |row|
+      Customer.new(row)
+    end
+    self.new(customer_objects)
   end
 
 

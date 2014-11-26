@@ -1,12 +1,19 @@
 require_relative 'MetaRepository'
 
 class InvoicesRepository < MetaRepository
+  attr_reader :invoice
 
-  def initialize(filename)
-    CSV.open(filename, headers: true, header_converters: :symbol)
+  def initialize(invoices)
+    @invoices = invoices
   end
 
-  
+  def self.build_invoices(data)
+    invoice_objects = data.map do |row|
+      Invoice.new(row)
+    end
+    self.new(invoice_objects)
+  end
+
 
   def transactions
     # returns a collection of associated Transaction instances
