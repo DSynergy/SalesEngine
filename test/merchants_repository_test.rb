@@ -5,7 +5,6 @@ require_relative '../lib/merchant'
 
 class MerchantsRepositoryTest < Minitest::Test
 
-
   def setup
     @merchant_data        = CSVHandler.open_csv("../data/fixtures/merchants.csv")
     @merchants_repository = MerchantsRepository.build_merchants(@merchant_data)
@@ -17,8 +16,8 @@ class MerchantsRepositoryTest < Minitest::Test
   end
 
   def test_it_returns_a_random_customer
-    random_merchant1 = @merchants_repository.random
-    random_merchant2 = @merchants_repository.random
+    random_merchant1 = @merchants_repository.merchants.random
+    random_merchant2 = @merchants_repository.merchants.random
     refute random_merchant1 == random_merchant2
   end
 

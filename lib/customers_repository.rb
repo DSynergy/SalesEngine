@@ -1,7 +1,7 @@
-require_relative 'MetaRepository'  # => true
+require_relative 'MetaRepository'
 
 class CustomersRepository < MetaRepository
- attr_reader :customer
+  attr_reader :customers
 
   def initialize(customers)
     @customers = customers

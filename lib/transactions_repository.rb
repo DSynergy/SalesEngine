@@ -1,10 +1,10 @@
 require_relative 'MetaRepository'
 
 class TransactionsRepository < MetaRepository
-  attr_reader :transaction
+  attr_reader :transactions
 
-  def initialize(transaction)
-    @transaction = transaction
+  def initialize(transactions)
+    @transactions = transactions
   end
 
   def self.build_transactions(data)

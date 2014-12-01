@@ -1,45 +1,46 @@
 require_relative 'test_helper'
 require '../lib/csv_handler'
 require '../lib/invoices_repository'
+require '../lib/invoice'
 
 class InvoicesRepositoryTest < Minitest::Test
 
-  def repository
-    rows = CSVHandler.load("../data/fixtures/invoices.csv")
-    repository = InvoicesRepository.new("engine", rows)
+  def setup
+    @invoice_data         = CSVHandler.open_csv("../data/fixtures/invoices.csv")
+    @invoices_repository  = InvoicesRepository.build_invoices(@invoice_data)
   end
 
   def test_it_can_load_invoices
-    assert_equal 25, repository.invoices.length
+    assert_equal 24, @invoices_repository.invoices.length
   end
 
   def test_it_has_more_than_seven_invoices
-    assert repository.count > 7
+    assert @invoices_repository.count > 7
   end
 
   def test_it_returns_random_invoice
-    random_invoice1 = repository.random
-    random_invoice2 = repository.random
+    random_invoice1 = @invoices_repository.invoices.random
+    random_invoice2 = @invoices_repository.invoices.random
     refute random_invoice1 = random_invoice2
   end
 
   def test_finds_single_invoice_by_id
-    result = repository.find_by_id(7)
+    result = @invoices_repository.find_by_id(7)
     assert result.id, 7
   end
 
   def test_it_finds_multiple_invoices_by_customer_id
-    result = repository.find_all_by_customer_id(4)
+    result = @invoices_repository.find_all_by_customer_id(4)
     assert_equal 8, result.count
   end
 
   def test_it_can_find_by_status
-    result = repository.find_by_status('shipped')
+    result = @invoices_repository.find_by_status('shipped')
     assert "shipped", result.status
   end
 
   def test_it_can_find_all_by_status
-    result = repository.find_all_by_status("shipped")
+    result = @invoices_repository.find_all_by_status("shipped")
     assert 24, result.count
   end
 

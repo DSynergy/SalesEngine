@@ -1,7 +1,7 @@
 require_relative 'MetaRepository'
 
 class InvoicesRepository < MetaRepository
-  attr_reader :invoice
+  attr_reader :invoices
 
   def initialize(invoices)
     @invoices = invoices
