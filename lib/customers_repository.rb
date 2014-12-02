@@ -8,16 +8,11 @@ class CustomersRepository < MetaRepository
     "#<#{self.class} #{@customers.size} rows>"
   end
 
-  def initialize(customers,engine)
-    @customers = customers
-    @engine = engine
-  end
-
   def self.build_customers(data,engine)
     customer_objects = data.map do |row|
-      Customer.new(row,self)
+      Customer.new(row,engine)
     end
-    self.new(customer_objects,self)
+    self.new(customer_objects,engine)
   end
 
 
