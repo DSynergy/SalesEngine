@@ -25,13 +25,13 @@ class SalesEngine
               :merchants_repository,      # => :merchants_repository
               :transactions_repository    # => nil
 
-  def initialize
-    @customer_data     = CSVHandler.open_csv("../data/customers.csv")
-    @invoice_data      = CSVHandler.open_csv('../data/invoices.csv')
-    @invoice_item_data = CSVHandler.open_csv('../data/invoice_items.csv')
-    @item_data         = CSVHandler.open_csv('../data/items.csv')
-    @merchant_data     = CSVHandler.open_csv('../data/merchants.csv')
-    @transaction_data  = CSVHandler.open_csv('../data/transactions.csv')
+  def initialize(dir='./data')
+    @customer_data     = CSVHandler.open_csv("#{dir}/customers.csv")
+    @invoice_data      = CSVHandler.open_csv("#{dir}/invoices.csv")
+    @invoice_item_data = CSVHandler.open_csv("#{dir}/invoice_items.csv")
+    @item_data         = CSVHandler.open_csv("#{dir}/items.csv")
+    @merchant_data     = CSVHandler.open_csv("#{dir}/merchants.csv")
+    @transaction_data  = CSVHandler.open_csv("#{dir}/transactions.csv")
   end
 
   def startup
@@ -56,17 +56,15 @@ class SalesEngine
     end
   end
 
-  def invoice_item_relationships_by_item_id
+  def invoice_item_relationships
     invoice_items_repository.all.each do |item|
       invoice_item.item       = invoice_items_repository.find_by_attribute(item.id)
     end
-  end
-
-  def invoice_items_relationships_by_invoice_id
     invoice_items_repository.all.each do |invoice|
       invoice_item.invoice    = invoice_items_repository.find_by_attribute(invoice.id)
     end
   end
+
 
   def invoice_relationships
     merchant_repository.all.each do |merchant|

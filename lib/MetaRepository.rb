@@ -2,6 +2,9 @@ require_relative 'sales_engine'
 
 class MetaRepository
 
+  def inspect
+    "#<#{self.class} #{@merchants.size} rows>"
+  end
 
 # this stores all the methods that all the repositories needs
 
