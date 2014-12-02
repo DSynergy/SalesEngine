@@ -25,7 +25,7 @@ class SalesEngine
               :merchants_repository,      # => :merchants_repository
               :transactions_repository    # => nil
 
-  def initialize(dir='./data')
+  def initialize(dir=File.join(__dir__, '..', 'data'))
     @customer_data     = CSVHandler.open_csv("#{dir}/customers.csv")
     @invoice_data      = CSVHandler.open_csv("#{dir}/invoices.csv")
     @invoice_item_data = CSVHandler.open_csv("#{dir}/invoice_items.csv")
