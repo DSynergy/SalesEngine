@@ -17,6 +17,7 @@ class Merchant
     # return each item under a certain merchant id
   end
 
+###Business Logic#####
 
   def revenue(date)
     #revenue returns the total revenue for that merchant across all transactions

@@ -22,7 +22,7 @@ class MerchantsRepository < MetaRepository
 
 
   def invoice
-    # returns a collection of Invoice instances associated with that merchant from their known orders
+    @engine.merchant_relationships # returns a collection of Invoice instances associated with that merchant from their known orders
   end
 
 end

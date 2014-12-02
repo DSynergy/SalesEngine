@@ -1,29 +1,29 @@
-require 'csv'                                # => true
-require 'bigdecimal'                         # => true
-require 'time'                               # => true
-require_relative 'merchant'                  # => true
-require_relative 'merchants_repository'      # => true
-require_relative 'customer'                  # => true
-require_relative 'customers_repository'      # => true
-require_relative 'invoice_item'              # => true
-require_relative 'invoice_items_repository'  # => true
-require_relative 'invoice'                   # => true
-require_relative 'invoices_repository'       # => true
-require_relative 'item'                      # => true
-require_relative 'items_repository'          # => true
-require_relative 'metarepository'            # => true
-require_relative 'transaction'               # => true
-require_relative 'transactions_repository'   # => true
-require_relative 'CSV_handler'               # => true
+require 'csv'
+require 'bigdecimal'
+require 'time'
+require_relative 'merchant'
+require_relative 'merchants_repository'
+require_relative 'customer'
+require_relative 'customers_repository'
+require_relative 'invoice_item'
+require_relative 'invoice_items_repository'
+require_relative 'invoice'
+require_relative 'invoices_repository'
+require_relative 'item'
+require_relative 'items_repository'
+require_relative 'metarepository'
+require_relative 'transaction'
+require_relative 'transactions_repository'
+require_relative 'CSV_handler'
 
 
 class SalesEngine
-  attr_reader :customers_repository,      # => :customers_repository
-              :invoices_repository,       # => :invoices_repository
-              :invoice_items_repository,  # => :invoice_items_repository
-              :items_repository,           # => :itemsrepository
-              :merchants_repository,      # => :merchants_repository
-              :transactions_repository    # => nil
+  attr_reader :customers_repository,
+              :invoices_repository,
+              :invoice_items_repository,
+              :items_repository,
+              :merchants_repository,
+              :transactions_repository
 
   def initialize(dir=File.join(__dir__, '..', 'data'))
     @customer_data     = CSVHandler.open_csv("#{dir}/customers.csv")
@@ -51,39 +51,51 @@ class SalesEngine
   end
 
   def customer_relationships
-    customers_repository.all.each do |customer|
-      customer.invoices = customer_repository.find_all_by_attribute(invoice.id)
+    customers_repository.all.each do |invoice|
+      customer.invoices = invoices_repository.find_by_attribute(invoice.id)
     end
   end
 
   def invoice_item_relationships
     invoice_items_repository.all.each do |item|
-      invoice_item.item       = invoice_items_repository.find_by_attribute(item.id)
+      invoice_item.item       = items_repository.find_by_attribute(item.id)
     end
     invoice_items_repository.all.each do |invoice|
-      invoice_item.invoice    = invoice_items_repository.find_by_attribute(invoice.id)
+      invoice_item.invoice    = invoices_repository.find_by_attribute(invoice.id)
     end
   end
 
 
   def invoice_relationships
-    merchant_repository.all.each do |merchant|
-      merchant.items    = items_repository.find_all_by_attribute(merchant.id)
-      merchant.invoices = invoices_repository.find_all_by_attribute(merchant.id)
+    invoices_repository.all.each do |transaction|
+      invoice.transactions    = transactions_repository.find_all_by_attribute(transaction.id)
+    end
+    invoices_repository.all.each do |invoice_item|
+      invoice.invoice_items       = invoice_items_repository.find_all_by_attribute(invoice_item.id)
+    end
+    invoices_repository.all.each do |item|
+      invoice.items           = invoice_items_repository.find_all_by_attribute(item.id)
+    end
+    invoices_repository.all.each do |customer|
+      invoice.customer        = customers_repository.find_by_attribute(customer.id)
+    end
+    invoices_repository.all.each do |merchant|
+      invoice.merchant        = merchants_repository.find_by_attribute(merchant.id)
     end
   end
 
   def item_relationships
-    merchant_repository.all.each do |merchant|
-      merchant.items    = items_repository.find_all_by_attribute(merchant.id)
-      merchant.invoices = invoices_repository.find_all_by_attribute(merchant.id)
+    items_repository.all.each do |invoice_items|
+      item.invoice_items    = invoice_items_repository.find_all_by_attribute(invoice_items.id)
+    end
+    items_repository.all.each do |merchant|
+      item.merchant     = merchants_repository.find_by_attribute(merchant.id)
     end
   end
 
   def transactions_relationships
-    merchant_repository.all.each do |merchant|
-      merchant.items    = items_repository.find_all_by_attribute(merchant.id)
-      merchant.invoices = invoices_repository.find_all_by_attribute(merchant.id)
+    transactions_repository.all.each do |invoice|
+      transaction.inovice    = invoices_repository.find_by_attribute(invoice.id)
     end
   end
 

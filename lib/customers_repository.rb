@@ -22,7 +22,7 @@ class CustomersRepository < MetaRepository
 
 
   def invoices
-    # returns a collection of Invoice instances associated with this object.end
+    @engine.customer_relationships # returns a collection of Invoice instances associated with this object.end
   end
 
   # Customer Extension

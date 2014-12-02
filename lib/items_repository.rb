@@ -22,15 +22,15 @@ class ItemsRepository < MetaRepository
 
 
   def invoice_items
-    # returns a collection of InvoiceItems associated with this object
+    @engine.item_relationships # returns a collection of InvoiceItems associated with this object
   end
 
 
   def merchant
-    # returns an instance of Merchant associated with this object  end
+    @engine.item_relationships # returns an instance of Merchant associated with this object  end
   end
 
-  # Business logic
+  ####Business logic#####
 
   def most_revenue(x)
     # returns the top x item instances ranked by total revenue generated
