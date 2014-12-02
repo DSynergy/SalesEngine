@@ -4,6 +4,10 @@ require_relative 'sales_engine'
 class CustomersRepository < MetaRepository
   attr_reader :customers, :engine
 
+  def inspect
+    "#<#{self.class} #{@customers.size} rows>"
+  end
+
   def initialize(customers,engine)
     @customers = customers
     @engine = engine
