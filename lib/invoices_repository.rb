@@ -1,17 +1,19 @@
+require_relative 'sales_engine'
 require_relative 'MetaRepository'
 
 class InvoicesRepository < MetaRepository
-  attr_reader :invoices
+  attr_reader :invoices, :engine
 
-  def initialize(invoices)
+  def initialize(invoices,engine)
     @invoices = invoices
+    @engine = engine
   end
 
-  def self.build_invoices(data)
+  def self.build_invoices(data,engine)
     invoice_objects = data.map do |row|
-      Invoice.new(row)
+      Invoice.new(row,self)
     end
-    self.new(invoice_objects)
+    self.new(invoice_objects,self)
   end
 
 

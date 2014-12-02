@@ -1,18 +1,72 @@
 require_relative 'test_helper'             # => true
-require_relative '../lib/sales_engine'  # ~> Errno::ENOENT: No such file or directory @ rb_sysopen - ../data/customers.csv
+require '../lib/sales_engine'# ~> Errno::ENOENT: No such file or directory @ rb_sysopen - ../data/customers.csv
 
 class IntegrationTest < Minitest::Test
+
+  def initialize
+    @customer_data     = CSVHandler.open_csv("../data/fixtures/customers.csv")
+    @invoice_data      = CSVHandler.open_csv('../data/fixtures/invoices.csv')
+    @invoice_item_data = CSVHandler.open_csv('../data/fixtures/invoice_items.csv')
+    @item_data         = CSVHandler.open_csv('../data/fixtures/items.csv')
+    @merchant_data     = CSVHandler.open_csv('../data/fixtures/merchants.csv')
+    @transaction_data  = CSVHandler.open_csv('../data/fixtures/transactions.csv')
+  end
+
+  def startup
+    @customers_repository     = CustomersRepository.build_customers(@customer_data,self)
+    @invoices_repository      = InvoicesRepository.build_invoices(@invoice_data,self)
+    @invoice_items_repository = InvoiceItemsRepository.build_invoice_items(@invoice_item_data,self)
+    @transactions_repository  = TransactionsRepository.build_transactions(@transaction_data,self)
+    @merchants_repository     = MerchantsRepository.build_merchants(@merchant_data,self)
+    @items_repository         = ItemsRepository.build_items(@item_data,self)
+  end
 
   def test_a_sales_engine_can_be_instantiated
       assert SalesEngine.new
   end
 
+#tests that sales engines talks to repositories
+
   def test_sales_engine_can_talk_to_items_repository
-    se = SalesEngine.new
-    se.startup
-    assert se.items_repository
+    @engine.startup
+    assert @engine.items_repository
   end
 
+  def test_sales_engine_can_talk_to_merchants_repository
+    @engine.startup
+    assert @engine.items_repository
+  end
+
+  def test_sales_engine_can_talk_to_transactions_repository
+    @engine.startup
+    assert @engine.transactions_repository
+  end
+
+  def test_sales_engine_can_talk_to_customers_repository
+    @engine.startup
+    assert @engine.customers_repository
+  end
+
+  def test_sales_engine_can_talk_to_invoices_repository
+    @engine.startup
+    assert @engine.invoices_repository
+  end
+
+  def test_sales_engine_can_talk_to_invoice_items_repository
+    @engine.startup
+    assert @engine.invoice_items_repository
+  end
+
+  # test the relationship methods in sales engine
+
+
+  def test_items_returns_item_instances_per_merchant
+   @merchant.items.count
+  end
+
+# test here all the methods that are defined in the sales engine
+
+# test that the item class knows about the item repository
 
 end
 

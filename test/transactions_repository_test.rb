@@ -1,13 +1,11 @@
 require_relative 'test_helper'
-require '../lib/csv_handler'
-require '../lib/transactions_repository'
-require '../lib/transaction'
+require '../lib/sales_engine'
 
 class TransactionsRepositoryTest < Minitest::Test
 
   def setup
     @transaction_data         = CSVHandler.open_csv("../data/fixtures/transactions.csv")
-    @transactions_repository  = TransactionsRepository.build_transactions(@transaction_data)
+    @transactions_repository  = TransactionsRepository.build_transactions(@transaction_data,self)
   end
 
   def test_it_can_load_a_repository

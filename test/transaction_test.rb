@@ -1,5 +1,5 @@
 require_relative 'test_helper'
-require '../lib/transaction'
+require '../lib/sales_engine'
 
 class TransactionTest < Minitest::Test
 
@@ -8,7 +8,7 @@ class TransactionTest < Minitest::Test
     credit_card_expiration_date: "05/14", result: "failure", created_at:
     "9:01", updated_at: "9:02"}
 
-    transaction = Transaction.new(data)
+    transaction = Transaction.new(data,self)
 
     assert_equal 123, transaction.id
     assert_equal 4567, transaction.invoice_id

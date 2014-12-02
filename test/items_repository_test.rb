@@ -1,13 +1,11 @@
 require_relative 'test_helper'
-require '../lib/csv_handler'
-require '../lib/items_repository'
-require '../lib/item'
+require '../lib/sales_engine'
 
 class ItemsRepositoryTest < Minitest::Test
 
   def setup
     @item_data        = CSVHandler.open_csv("../data/fixtures/items.csv")
-    @items_repository = ItemsRepository.build_items(@item_data)
+    @items_repository = ItemsRepository.build_items(@item_data,self)
   end
 
   def test_it_loaded_fixtures

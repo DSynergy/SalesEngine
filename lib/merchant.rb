@@ -1,29 +1,36 @@
+require_relative 'merchants_repository'
+
 class Merchant
 
-  attr_reader :id, :name, :created_at, :updated_at
+  attr_reader :repo, :id, :name, :created_at, :updated_at
 
-  def initialize(data)
+  def initialize(data,repo)
     @id = data[:id].to_i
     @name = data[:name]
     @created_at = data[:created_at]
     @updated_at = data[:updated_at]
+    @repo = repo
+  end
 
+  def items
+    engine.merchant_relationships
+    # return each item under a certain merchant id
   end
 
 
-def revenue(date)
-  #revenue returns the total revenue for that merchant across all transactions
-  #revenue(date) returns the total revenue for that merchant for a specific invoice date
+  def revenue(date)
+    #revenue returns the total revenue for that merchant across all transactions
+    #revenue(date) returns the total revenue for that merchant for a specific invoice date
 
-end
+  end
 
-def favorite_customer
-  #favorite_customer returns the Customer who has conducted the most successful transactions
-end
+  def favorite_customer
+    #favorite_customer returns the Customer who has conducted the most successful transactions
+  end
 
-def customers_with_pending_invoices
-  #customers_with_pending_invoices returns a collection of Customer instances which have pending (unpaid) invoices. An invoice is considered pending if none of it’s transactions are successful.
-end
+  def customers_with_pending_invoices
+    #customers_with_pending_invoices returns a collection of Customer instances which have pending (unpaid) invoices. An invoice is considered pending if none of it’s transactions are successful.
+  end
 
 # Merchant extension
 

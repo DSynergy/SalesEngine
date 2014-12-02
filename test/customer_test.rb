@@ -1,5 +1,5 @@
 require_relative 'test_helper'
-require '../lib/customer'
+require'../lib/sales_engine'
 
 class CustomerTest < Minitest::Test
 
@@ -7,7 +7,7 @@ class CustomerTest < Minitest::Test
     data = {id: "42", first_name: "Billy", last_name: "Bob",
     created_at: "12:01", updated_at: "12:02"}
 
-    customer = Customer.new(data)
+    customer = Customer.new(data,repo)
 
     assert_equal 42, customer.id
     assert_equal "Billy", customer.first_name

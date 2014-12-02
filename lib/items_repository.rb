@@ -1,17 +1,19 @@
 require_relative 'MetaRepository'
+require_relative 'sales_engine'
 
 class ItemsRepository < MetaRepository
-    attr_reader :items
+    attr_reader :items, :engine
 
-    def initialize(items)
+    def initialize(items,engine)
       @items = items
+      @engine = engine
     end
 
-    def self.build_items(data)
+    def self.build_items(data,engine)
       item_objects = data.map do |row|
-        Item.new(row)
+        Item.new(row,self)
       end
-      self.new(item_objects)
+      self.new(item_objects,self)
     end
 
 

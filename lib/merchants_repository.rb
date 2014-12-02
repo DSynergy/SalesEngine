@@ -1,17 +1,19 @@
 require_relative 'MetaRepository'
+require_relative 'sales_engine'
 
 class MerchantsRepository < MetaRepository
-  attr_reader :merchants
+  attr_reader :merchants, :engine
 
-  def initialize(merchants)
+  def initialize(merchants,engine)
     @merchants = merchants
+    @engine = engine
   end
 
-  def self.build_merchants(data)
+  def self.build_merchants(data,engine)
     merchant_objects = data.map do |row|
-      Merchant.new(row)
+      Merchant.new(row,self)
     end
-    self.new(merchant_objects)
+    self.new(merchant_objects,self)
   end
 
 

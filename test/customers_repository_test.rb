@@ -1,13 +1,11 @@
 require_relative 'test_helper'
-require '../lib/csv_handler'
-require '../lib/customers_repository'
-require '../lib/customer'
+require'../lib/sales_engine'
 
 class CustomersRepositoryTest < Minitest::Test
 
   def setup
     @customer_data         = CSVHandler.open_csv("../data/fixtures/customers.csv")
-    @customers_repository  = CustomersRepository.build_customers(@customer_data)
+    @customers_repository  = CustomersRepository.build_customers(@customer_data,self)
   end
 
   def test_it_loads_items

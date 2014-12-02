@@ -1,17 +1,19 @@
 require_relative 'MetaRepository'
+require_relative 'sales_engine'
 
 class CustomersRepository < MetaRepository
-  attr_reader :customers
+  attr_reader :customers, :engine
 
-  def initialize(customers)
+  def initialize(customers,engine)
     @customers = customers
+    @engine = engine
   end
 
-  def self.build_customers(data)
+  def self.build_customers(data,engine)
     customer_objects = data.map do |row|
-      Customer.new(row)
+      Customer.new(row,self)
     end
-    self.new(customer_objects)
+    self.new(customer_objects,self)
   end
 
 

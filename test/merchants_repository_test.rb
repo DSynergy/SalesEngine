@@ -1,15 +1,12 @@
 require_relative 'test_helper'
-require '../lib/csv_handler'
-require '../lib/merchants_repository'
-require_relative '../lib/merchant'
+require '../lib/sales_engine'
 
 class MerchantsRepositoryTest < Minitest::Test
 
   def setup
     @merchant_data        = CSVHandler.open_csv("../data/fixtures/merchants.csv")
-    @merchants_repository = MerchantsRepository.build_merchants(@merchant_data)
+    @merchants_repository = MerchantsRepository.build_merchants(@merchant_data,self)
   end
-
 
   def test_it_loads_the_repo
     assert_equal 24, @merchants_repository.merchants.length

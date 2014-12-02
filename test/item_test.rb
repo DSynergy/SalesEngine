@@ -1,5 +1,5 @@
 require_relative 'test_helper'
-require '../lib/item'
+require '../lib/sales_engine'
 require 'bigdecimal'
 
 class ItemTest < Minitest::Test
@@ -8,7 +8,7 @@ class ItemTest < Minitest::Test
       unit_price: "80000", merchant_id: "1",
       created_at: "11:45", updated_at: "10:07"}
 
-      item = Item.new(data)
+      item = Item.new(data,repo)
 
       assert_equal 540, item.id
       assert_equal "box", item.name

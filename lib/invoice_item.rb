@@ -1,7 +1,9 @@
-class InvoiceItem
-  attr_reader :id, :item_id, :invoice_id, :quantity, :unit_price, :created_at, :updated_at
+require_relative 'invoice_items_repository'
 
-  def initialize(data)
+class InvoiceItem
+  attr_reader :repo, :id, :item_id, :invoice_id, :quantity, :unit_price, :created_at, :updated_at
+
+  def initialize(data,repo)
     @id = data[:id].to_i
     @item_id = data[:item_id].to_i
     @invoice_id = data[:invoice_id].to_i
@@ -9,7 +11,7 @@ class InvoiceItem
     @unit_price = data[:unit_price].to_i/100
     @created_at = data[:created_at]
     @updated_at = data[:updated_at]
-
+    @repo = repo
   end
 
 

@@ -1,17 +1,19 @@
 require_relative 'MetaRepository'
+require_relative 'sales_engine'
 
 class TransactionsRepository < MetaRepository
-  attr_reader :transactions
+  attr_reader :transactions, :engine
 
-  def initialize(transactions)
+  def initialize(transactions,engine)
     @transactions = transactions
+    @engine = engine
   end
 
-  def self.build_transactions(data)
+  def self.build_transactions(data,engine)
     transaction_objects = data.map do |row|
-      Transaction.new(row)
+      Transaction.new(row,self)
     end
-    self.new(transaction_objects)
+    self.new(transaction_objects,self)
   end
 
 

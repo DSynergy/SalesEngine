@@ -1,13 +1,11 @@
 require_relative 'test_helper'
-require '../lib/csv_handler'
-require '../lib/invoice_items_repository'
-require '../lib/invoice_item'
+require '../lib/sales_engine'
 
 class InvoiceItemsRepoTest < Minitest::Test
 
   def setup
     @invoice_items_data       = CSVHandler.open_csv("../data/fixtures/invoice_items.csv")
-    @invoice_items_repository = InvoiceItemsRepository.build_invoice_items(@invoice_items_data)
+    @invoice_items_repository = InvoiceItemsRepository.build_invoice_items(@invoice_items_data,self)
   end
 
   def test_it_can_load_a_repo

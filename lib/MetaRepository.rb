@@ -1,3 +1,5 @@
+require_relative 'sales_engine'
+
 class MetaRepository
 
 # this stores all the methods that all the repositories needs

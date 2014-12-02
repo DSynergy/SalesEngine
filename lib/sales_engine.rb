@@ -32,34 +32,60 @@ class SalesEngine
     @item_data         = CSVHandler.open_csv('../data/items.csv')
     @merchant_data     = CSVHandler.open_csv('../data/merchants.csv')
     @transaction_data  = CSVHandler.open_csv('../data/transactions.csv')
-
   end
 
   def startup
-
-    @customers_repository     = CustomersRepository.build_customers(@customer_data)
-    @invoices_repository      = InvoicesRepository.build_invoices(@invoice_data)
-    @invoice_items_repository = InvoiceItemsRepository.build_invoice_items(@invoice_item_data)
-    @transactions_repository  = TransactionsRepository.build_transactions(@transaction_data)
-    @merchants_repository     = MerchantsRepository.build_merchants(@merchant_data)
-    @items_repository         = ItemsRepository.build_items(@item_data)
+    @customers_repository     = CustomersRepository.build_customers(@customer_data,self)
+    @invoices_repository      = InvoicesRepository.build_invoices(@invoice_data,self)
+    @invoice_items_repository = InvoiceItemsRepository.build_invoice_items(@invoice_item_data,self)
+    @transactions_repository  = TransactionsRepository.build_transactions(@transaction_data,self)
+    @merchants_repository     = MerchantsRepository.build_merchants(@merchant_data,self)
+    @items_repository         = ItemsRepository.build_items(@item_data,self)
   end
 
+  def merchant_relationships
+    merchant_repository.all.each do |merchant|
+      merchant.items    = items_repository.find_all_by_attribute(merchant.id)
+      merchant.invoices = invoices_repository.find_all_by_attribute(merchant.id)
+    end
+  end
 
+  def customer_relationships
+    merchant_repository.all.each do |merchant|
+      merchant.items    = items_repository.find_all_by_attribute(merchant.id)
+      merchant.invoices = invoices_repository.find_all_by_attribute(merchant.id)
+    end
+  end
 
+  def invoice_item_relationships
+    merchant_repository.all.each do |merchant|
+      merchant.items    = items_repository.find_all_by_attribute(merchant.id)
+      merchant.invoices = invoices_repository.find_all_by_attribute(merchant.id)
+    end
+  end
+
+  def invoice_relatiionships
+    merchant_repository.all.each do |merchant|
+      merchant.items    = items_repository.find_all_by_attribute(merchant.id)
+      merchant.invoices = invoices_repository.find_all_by_attribute(merchant.id)
+    end
+  end
+
+  def item_relationships
+    merchant_repository.all.each do |merchant|
+      merchant.items    = items_repository.find_all_by_attribute(merchant.id)
+      merchant.invoices = invoices_repository.find_all_by_attribute(merchant.id)
+    end
+  end
+
+  def transactions_relationships
+    merchant_repository.all.each do |merchant|
+      merchant.items    = items_repository.find_all_by_attribute(merchant.id)
+      merchant.invoices = invoices_repository.find_all_by_attribute(merchant.id)
+    end
+  end
 
 end
 
 engine = SalesEngine.new
 engine.startup
-
-# ~> Errno::ENOENT
-# ~> No such file or directory @ rb_sysopen - ../data/customers.csv
-# ~>
-# ~> /Users/DBomb/.rvm/rubies/ruby-2.1.3/lib/ruby/2.1.0/csv.rb:1256:in `initialize'
-# ~> /Users/DBomb/.rvm/rubies/ruby-2.1.3/lib/ruby/2.1.0/csv.rb:1256:in `open'
-# ~> /Users/DBomb/.rvm/rubies/ruby-2.1.3/lib/ruby/2.1.0/csv.rb:1256:in `open'
-# ~> /Users/DBomb/turing/Module 1 - Ruby and TDD/Sales_Engine/sales_engine/lib/CSV_handler.rb:13:in `open_csv'
-# ~> /Users/DBomb/turing/Module 1 - Ruby and TDD/Sales_Engine/sales_engine/lib/sales_engine.rb:29:in `initialize'
-# ~> /Users/DBomb/turing/Module 1 - Ruby and TDD/Sales_Engine/sales_engine/lib/sales_engine.rb:52:in `new'
-# ~> /Users/DBomb/turing/Module 1 - Ruby and TDD/Sales_Engine/sales_engine/lib/sales_engine.rb:52:in `<main>'
