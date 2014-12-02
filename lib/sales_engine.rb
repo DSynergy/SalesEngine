@@ -25,7 +25,7 @@ class SalesEngine
               :merchants_repository,      # => :merchants_repository
               :transactions_repository    # => nil
 
-  def initialize
+  def initialize(engine)
     @customer_data     = CSVHandler.open_csv("../data/customers.csv")
     @invoice_data      = CSVHandler.open_csv('../data/invoices.csv')
     @invoice_item_data = CSVHandler.open_csv('../data/invoice_items.csv')
