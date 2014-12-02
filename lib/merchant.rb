@@ -2,14 +2,14 @@ require_relative 'merchants_repository'
 
 class Merchant
 
-  attr_reader :repo, :id, :name, :created_at, :updated_at
+  attr_reader :engine, :id, :name, :created_at, :updated_at
 
-  def initialize(data,repo)
+  def initialize(data,engine)
     @id = data[:id].to_i
     @name = data[:name]
     @created_at = data[:created_at]
     @updated_at = data[:updated_at]
-    @repo = repo
+    @engine = engine
   end
 
   def items

@@ -8,16 +8,11 @@ class InvoiceItemsRepository < MetaRepository
     "#<#{self.class} #{@invoice_items.size} rows>"
   end
 
-  def initialize(invoice_items, engine)
-    @invoice_items = invoice_items
-    @engine = engine
-  end
-
   def self.build_invoice_items(data,engine)
     invoice_item_objects = data.map do |row|
-      InvoiceItem.new(row,self)
+      InvoiceItem.new(row,engine)
     end
-    self.new(invoice_item_objects,self)
+    self.new(invoice_item_objects,engine)
   end
 
 

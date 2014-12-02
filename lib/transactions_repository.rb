@@ -8,16 +8,11 @@ class TransactionsRepository < MetaRepository
     "#<#{self.class} #{@transactions.size} rows>"
   end
 
-  def initialize(transactions,engine)
-    @transactions = transactions
-    @engine = engine
-  end
-
   def self.build_transactions(data,engine)
     transaction_objects = data.map do |row|
-      Transaction.new(row,self)
+      Transaction.new(row,engine)
     end
-    self.new(transaction_objects,self)
+    self.new(transaction_objects,engine)
   end
 
 

@@ -1,7 +1,7 @@
 require_relative 'invoice_items_repository'
 
 class InvoiceItem
-  attr_reader :repo, :id, :item_id, :invoice_id, :quantity, :unit_price, :created_at, :updated_at
+  attr_reader :engine, :id, :item_id, :invoice_id, :quantity, :unit_price, :created_at, :updated_at
 
   def initialize(data,repo)
     @id = data[:id].to_i
@@ -11,7 +11,7 @@ class InvoiceItem
     @unit_price = data[:unit_price].to_i/100
     @created_at = data[:created_at]
     @updated_at = data[:updated_at]
-    @repo = repo
+    @engine = engine
   end
 
 

@@ -8,16 +8,11 @@ class MerchantsRepository < MetaRepository
     "#<#{self.class} #{@merchants.size} rows>"
   end
 
-  def initialize(merchants,engine)
-    @merchants = merchants
-    @engine = engine
-  end
-
   def self.build_merchants(data,engine)
     merchant_objects = data.map do |row|
-      Merchant.new(row,self)
+      Merchant.new(row,engine)
     end
-    self.new(merchant_objects,self)
+    self.new(merchant_objects,engine)
   end
 
 

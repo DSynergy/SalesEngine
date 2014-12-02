@@ -1,9 +1,9 @@
 require_relative 'transactions_repository'
 
 class Transaction
-  attr_reader :repo, :id, :credit_card_number, :invoice_id, :credit_card_expiration_date, :result, :created_at, :updated_at
+  attr_reader :engine, :id, :credit_card_number, :invoice_id, :credit_card_expiration_date, :result, :created_at, :updated_at
 
-  def initialize(data,repo)
+  def initialize(data,engine)
     @id = data[:id].to_i
     @invoice_id = data[:invoice_id].to_i
     @credit_card_number = data[:credit_card_number]
@@ -11,7 +11,7 @@ class Transaction
     @result = data[:result]
     @created_at = data[:created_at]
     @updated_at = data[:updated_at]
-    @repo = repo
+    @engine = engine
   end
 
 

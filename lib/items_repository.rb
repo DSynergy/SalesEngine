@@ -8,11 +8,6 @@ class ItemsRepository < MetaRepository
       "#<#{self.class} #{@items.size} rows>"
     end
 
-    def initialize(items,engine)
-      @items = items
-      @engine = engine
-    end
-
     def self.build_items(data,engine)
       item_objects = data.map do |row|
         Item.new(row,self)
