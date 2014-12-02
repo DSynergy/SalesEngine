@@ -21,11 +21,6 @@ class MerchantsRepository < MetaRepository
   end
 
 
-
-  def items
-    # Returns a collection of Item instances associated with that merchant for the products they sell
-  end
-
   def invoice
     # returns a collection of Invoice instances associated with that merchant from their known orders
   end

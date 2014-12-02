@@ -25,7 +25,7 @@ class SalesEngine
               :merchants_repository,      # => :merchants_repository
               :transactions_repository    # => nil
 
-  def initialize(engine)
+  def initialize
     @customer_data     = CSVHandler.open_csv("../data/customers.csv")
     @invoice_data      = CSVHandler.open_csv('../data/invoices.csv')
     @invoice_item_data = CSVHandler.open_csv('../data/invoice_items.csv')
@@ -44,27 +44,31 @@ class SalesEngine
   end
 
   def merchant_relationships
-    merchant_repository.all.each do |merchant|
+    merchants_repository.all.each do |merchant|
       merchant.items    = items_repository.find_all_by_attribute(merchant.id)
       merchant.invoices = invoices_repository.find_all_by_attribute(merchant.id)
     end
   end
 
   def customer_relationships
-    merchant_repository.all.each do |merchant|
-      merchant.items    = items_repository.find_all_by_attribute(merchant.id)
-      merchant.invoices = invoices_repository.find_all_by_attribute(merchant.id)
+    customers_repository.all.each do |customer|
+      customer.invoices = customer_repository.find_all_by_attribute(invoice.id)
     end
   end
 
-  def invoice_item_relationships
-    merchant_repository.all.each do |merchant|
-      merchant.items    = items_repository.find_all_by_attribute(merchant.id)
-      merchant.invoices = invoices_repository.find_all_by_attribute(merchant.id)
+  def invoice_item_relationships_by_item_id
+    invoice_items_repository.all.each do |item|
+      invoice_item.item       = invoice_items_repository.find_by_attribute(item.id)
     end
   end
 
-  def invoice_relatiionships
+  def invoice_items_relationships_by_invoice_id
+    invoice_items_repository.all.each do |invoice|
+      invoice_item.invoice    = invoice_items_repository.find_by_attribute(invoice.id)
+    end
+  end
+
+  def invoice_relationships
     merchant_repository.all.each do |merchant|
       merchant.items    = items_repository.find_all_by_attribute(merchant.id)
       merchant.invoices = invoices_repository.find_all_by_attribute(merchant.id)
