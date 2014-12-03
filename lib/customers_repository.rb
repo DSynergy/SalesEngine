@@ -27,6 +27,10 @@ class CustomersRepository < MetaRepository
     find_by_attribute(:first_name, name)
   end
 
+  def find_all_by_first_name(name)
+    find_all_by_attribute(:first_name, name)
+  end
+
   def find_by_id(id)
     find_by_attribute(:id, id)
   end

@@ -1,7 +1,7 @@
 require_relative 'invoices_repository'
 
 class Invoice
-  attr_reader :engine, :id, :merchant_id, :customer_id, :created_at, :updated_at
+  attr_reader :engine, :id, :merchant_id, :customer_id, :created_at, :updated_at, :status
 
   def initialize(data,engine)
     @id = data[:id].to_i
@@ -9,6 +9,7 @@ class Invoice
     @merchant_id = data[:merchant_id].to_i
     @created_at = data[:created_at]
     @updated_at = data[:updated_at]
+    @status = data[:status]
     @engine = engine
   end
 

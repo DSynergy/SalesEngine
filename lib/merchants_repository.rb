@@ -15,11 +15,24 @@ class MerchantsRepository < MetaRepository
     self.new(merchant_objects,engine)
   end
 
-  def invoice
+  def invoices
     @engine.merchant_relationships # returns a collection of Invoice instances associated with that merchant from their known orders
   end
 
+  def merchants
+    @entries
+  end
+
+  def find_by_id(id)
+    find_by_attribute(:id, id)
+  end
+
+  def find_by_name(name)
+    find_by_attribute(:name, name)
+  end
+
 end
+
 
 # Business logic
 #

@@ -9,13 +9,16 @@ class TransactionsRepositoryTest < Minitest::Test
   end
 
   def test_it_can_load_a_repository
-    assert_equal 24, @transactions_repository.transactions.length
+    assert_equal 24, @transactions_repository.transactions.count
   end
 
   def test_returns_a_random_transaction
-    random_transaction1 = @transactions_repository.transactions.random
-    random_transaction2 = @transactions_repository.transactions.random
-    refute random_transaction1 == random_transaction2
+    count = 10.times.count do |i|
+      random_transaction1 = @transactions_repository.random
+      random_transaction2 = @transactions_repository.random
+      random_transaction1 == random_transaction2
+    end
+    assert count < 2
   end
 
   def test_finds_transactions_by_id

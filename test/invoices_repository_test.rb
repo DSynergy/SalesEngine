@@ -12,14 +12,13 @@ class InvoicesRepositoryTest < Minitest::Test
     assert_equal 24, @invoices_repository.invoices.count
   end
 
-  def test_it_has_more_than_seven_invoices
-    assert @invoices_repository.count > 7
-  end
-
   def test_it_returns_random_invoice
-    random_invoice1 = @invoices_repository.random
-    random_invoice2 = @invoices_repository.random
-    refute random_invoice1 = random_invoice2
+    count = 10.times.count do |i|
+      random_invoice1 = @invoices_repository.random
+      random_invoice2 = @invoices_repository.random
+      random_invoice1 == random_invoice2
+    end
+    assert count < 2
   end
 
   def test_finds_single_invoice_by_id

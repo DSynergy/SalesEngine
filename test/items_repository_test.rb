@@ -13,9 +13,13 @@ class ItemsRepositoryTest < Minitest::Test
   end
 
   def test_it_returns_a_random_item
-    random_item1 = @items_repository.random
-    random_item2 = @items_repository.random
-    refute random_item1 == random_item2
+    count = 10.times.count do |i|
+      random_item1 = @items_repository.random
+      random_item2 = @items_repository.random
+      random_item1 == random_item2
+    end
+    assert count < 2
+
   end
 
   def test_it_finds_items_by_id

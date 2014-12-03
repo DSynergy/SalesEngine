@@ -2,7 +2,7 @@ require_relative 'MetaRepository'
 require_relative 'sales_engine'
 
 class TransactionsRepository < MetaRepository
-  attr_reader :transactions, :engine
+  attr_reader :entries, :engine
 
   def inspect
     "#<#{self.class} #{@transactions.size} rows>"
@@ -15,10 +15,24 @@ class TransactionsRepository < MetaRepository
     self.new(transaction_objects,engine)
   end
 
-
   def invoice
     @engine.transaction_relationships # returns an instance of Invoice associated with this object
   end
 
+  def transactions
+    @entries
+  end
+
+  def find_by_id(id)
+    find_by_attribute(:id,id)
+  end
+
+  def find_all_by_result(result)
+    find_all_by_attribute(:result, result)
+  end
+
+  def find_by_credit_card_number(cc)
+    find_by_attribute(:credit_card_number, cc)
+  end
 
 end

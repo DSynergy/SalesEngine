@@ -19,20 +19,20 @@ class InvoicesRepository < MetaRepository
     @entries
   end
 
-  def find_by_id(id)
-    find_by_attribute(:id, id)
-  end
-
-  def find_all_by_customer_id(id)
-    find_all_by_attribute(:customer_id, id)
+  def find_by_status(status)
+    find_by_attribute(:status, status)
   end
 
   def find_all_by_status(status)
     find_all_by_attribute(:status, status)
   end
 
-  def random
-    @engine.sample
+  def find_by_id(id)
+    find_by_attribute(:id, id)
+  end
+
+  def find_all_by_customer_id(id)
+    find_all_by_attribute(:customer_id, id)
   end
 
   def transactions

@@ -9,13 +9,16 @@ class MerchantsRepositoryTest < Minitest::Test
   end
 
   def test_it_loads_the_repo
-    assert_equal 24, @merchants_repository.merchants.length
+    assert_equal 24, @merchants_repository.merchants.count
   end
 
   def test_it_returns_a_random_customer
-    random_merchant1 = @merchants_repository.merchants.random
-    random_merchant2 = @merchants_repository.merchants.random
-    refute random_merchant1 == random_merchant2
+    count = 10.times.count do |i|
+      random_merchant1 = @merchants_repository.random
+      random_merchant2 = @merchants_repository.random
+      random_merchant1 == random_merchant2
+    end
+    assert count < 2
   end
 
   def test_it_finds_by_first_name

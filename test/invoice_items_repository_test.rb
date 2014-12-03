@@ -13,9 +13,12 @@ class InvoiceItemsRepoTest < Minitest::Test
   end
 
   def test_it_returns_a_random_invoice_item
+  count = 10.times.count do |i|
     random_invoice_item1 = @invoice_items_repository.random
     random_invoice_item2 = @invoice_items_repository.random
-    refute random_invoice_item1 == random_invoice_item2, "you fail this 1/24 of the time: unlucky you"
+    random_invoice_item1 == random_invoice_item2
+    end
+    assert count < 2
   end
 
   def test_it_can_find_invoice_items_by_id
