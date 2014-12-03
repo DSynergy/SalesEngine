@@ -14,6 +14,14 @@ class InvoiceItem
     @engine = engine
   end
 
+  def item
+    @engine.invoice_item_relationships_item(self)
+  end
+
+  def invoice
+    @engine.invoice_item_relationships_invoice(self)
+  end
+
 
 end
 

@@ -13,13 +13,22 @@ class Item
     @updated_at = data[:updated_at]
     @engine = engine
 
+  end
 
+  def invoice_items
+    @engine.item_relationships_by_invoice_items(self)
   end
 
 
+  def merchant
+    @engine.item_relationships_by_merchant(self)
+  end
 
-def best_day
-  # returns the date with the most sales for the given item using the invoice date
-end
+
+#
+#
+# def best_day
+#   # returns the date with the most sales for the given item using the invoice date
+# end
 
 end

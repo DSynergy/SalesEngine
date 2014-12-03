@@ -24,6 +24,8 @@ class SalesEngine
                 :merchants_repository,
                 :transactions_repository
 
+  attr_reader   :items, :merchants, :invoices, :transactions, :invoice_items, :customers
+
   alias_method :customer_repository, :customers_repository
   alias_method :invoice_repository, :invoices_repository
   alias_method :invoice_item_repository, :invoice_items_repository
@@ -49,59 +51,56 @@ class SalesEngine
     @items_repository         ||= ItemsRepository.build_items(@item_data,self)
   end
 
-  def merchant_relationships
-    @merchants_repository.all.each do |merchant|
-      merchant.items    = @items_repository.find_all_by_attribute(:merchant_id, id)
-      merchant.invoices = @invoices_repository.find_all_by_attribute(:merchant_id, id)
-    end
+  def merchant_relationship_items(merchant)
+    @items_repository.find_all_by_attribute(:merchant_id, merchant.id)
   end
 
-  def customer_relationships
-    @customers_repository.all.each do |invoice|
-      customer.invoices = @invoices_repository.find_by_attribute(:invoice_id, id)
-    end
+  def merchant_relationship_invoices(merchant)
+    @invoices_repository.find_all_by_attribute(:merchant_id, merchant.id)
   end
 
-  def invoice_item_relationships
-    @invoice_items_repository.all.each do |item|
-      invoice_item.item       = @items_repository.find_by_attribute(:item_id, id)
-    end
-    @invoice_items_repository.all.each do |invoice|
-      invoice_item.invoice    = @invoices_repository.find_by_attribute(:invoice_id, id)
-    end
+  def customer_relationships(customer)
+    @invoices_repository.find_all_by_attribute(:id, customer.id)
   end
 
-  def invoice_relationships
-    @invoices_repository.all.each do |transaction|
-      invoice.transactions    = @transactions_repository.find_all_by_attribute(:transaction_id, id)
-    end
-    @invoices_repository.all.each do |invoice_item|
-      invoice.invoice_items       = @invoice_items_repository.find_all_by_attribute(:invoice_item.id)
-    end
-    @invoices_repository.all.each do |item|
-      invoice.items           = @invoice_items_repository.find_all_by_attribute(:item_id, id)
-    end
-    @invoices_repository.all.each do |customer|
-      invoice.customer        = @customers_repository.find_by_attribute(:customer_id, id)
-    end
-    @invoices_repository.all.each do |merchant|
-      invoice.merchant        = @merchants_repository.find_by_attribute(:merchant_id, id)
-    end
+  def invoice_item_relationships_item(invoice_item)
+    @items_repository.find_by_attribute(:id, invoice_item.id)
   end
 
-  def item_relationships
-    @items_repository.all.each do |invoice_items|
-      item.invoice_items    = @invoice_items_repository.find_all_by_attribute(:invoice_items_id, id)
-    end
-    @items_repository.all.each do |merchant|
-      item.merchant     = @merchants_repository.find_by_attribute(:merchant_id, id)
-    end
+  def invoice_item_relationships_invoice(invoice_item)
+    @invoices_repository.find_by_attribute(:id, invoice_item.id)
   end
 
-  def transactions_relationships
-    @transactions_repository.all.each do |invoice|
-      transaction.inovice    = @invoices_repository.find_by_attribute(:invoice_id, id)
-    end
+  def invoice_relationships_transactions(invoice)
+    @transactions_repository.find_all_by_attribute(:invoice_id, invoice.id)
+  end
+
+  def invoice_relationships_invoice_item(invoice)
+    @invoice_items_repository.find_all_by_attribute(:invoice_id, invoice.id)
+  end
+
+  def invoice_realtionships_item(invoice)
+    @invoice_items_repository.find_all_by_attribute(:invoice_id, invoice.id)
+  end #?
+
+  def invoice_relationships_by_customer_id(invoice)
+    @customers_repository.find_by_attribute(:id, customer.id)
+  end
+
+  def invoice_relationships_merchant_id(invoice)
+    @merchants_repository.find_by_attribute(:id, merchant.id)
+  end
+
+  def item_relationships_by_invoice_items(item)
+    @invoice_items_repository.find_all_by_attribute(:item_id, item.id)
+  end
+
+  def item_relationships_by_merchant(item)
+    @merchants_repository.find_by_attribute(:id, merchant.id)
+  end
+
+  def transactions_relationships_invoice(transaction)
+    @invoices_repository.find_by_attribute(:id, invoice.id)
   end
 
 

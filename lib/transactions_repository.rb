@@ -15,10 +15,6 @@ class TransactionsRepository < MetaRepository
     self.new(transaction_objects,engine)
   end
 
-  def invoice
-    @engine.transaction_relationships # returns an instance of Invoice associated with this object
-  end
-
   def transactions
     @entries
   end

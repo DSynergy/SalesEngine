@@ -35,25 +35,7 @@ class InvoicesRepository < MetaRepository
     find_all_by_attribute(:customer_id, id)
   end
 
-  def transactions
-    @engine.invoice_relationships # returns a collection of associated Transaction instances
-  end
 
-  def invoice_items
-    @engine.invoice_relationships # returns a collection of associated InvoiceItem instances
-  end
-
-  def items
-    @engine.invoice_relationships # returns a collection of associated Items by way of InvoiceItem objects
-  end
-
-  def customer
-    @engine.invoice_relationships # returns an instance of Customer associated with this object
-  end
-
-  def merchant
-    @engine.invoice_relationships # returns an instance of Merchant associated with this object
-  end
 
 
   # Invoice Extension

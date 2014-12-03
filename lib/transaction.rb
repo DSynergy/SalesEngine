@@ -14,5 +14,8 @@ class Transaction
     @engine = engine
   end
 
+  def invoice
+    @engine.transactions_relationships_invoice(self)
+  end
 
 end

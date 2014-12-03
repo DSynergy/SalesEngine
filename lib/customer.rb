@@ -14,6 +14,10 @@ attr_reader :engine, :id, :first_name, :last_name, :created_at, :updated_at
 
   end
 
+  def invoices
+    @engine.customer_relationships(self)
+  end
+
 # customer = Customer.new(row)
 
 

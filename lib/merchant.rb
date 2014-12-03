@@ -13,8 +13,11 @@ class Merchant
   end
 
   def items
-    @engine.merchant_relationships
-    # return each item under a certain merchant id
+    @engine.merchant_relationship_items(self)
+  end
+
+  def invoices
+    @engine.merchant_relationship_invoices(self)
   end
 
 ###Business Logic#####
