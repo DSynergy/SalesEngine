@@ -32,6 +32,11 @@ class ItemsRepositoryTest < Minitest::Test
     assert_equal 9, result.count
   end
 
+  def test_it_can_find_an_item_by_unit_price
+    result = @items_repository.find_by_unit_price(67076)
+    assert_equal "Item Autem Minima", result.name
+  end
+
   def test_it_finds_items_by_name
     result = @items_repository.find_by_name("Item Autem Minima")
     assert_equal "Item Autem Minima", result.name

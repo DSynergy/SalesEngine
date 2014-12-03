@@ -28,7 +28,8 @@ class InvoiceItemsRepoTest < Minitest::Test
 
   def test_it_can_find_invoice_items_by_item_id
     result = @invoice_items_repository.find_by_item_id(523)
-    assert_equal 523, result.item_id
+    assert_equal 348, result.unit_price
+    #Our test passes as compared to spec harness. This corectly finds the first 523 id item
   end
 
   def test_it_finds_invoice_items_with_a_specific_quantity

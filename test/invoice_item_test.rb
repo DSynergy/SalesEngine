@@ -14,7 +14,7 @@ class InvoiceItemTest < Minitest::Test
     assert_equal 298, invoice_items.item_id
     assert_equal 894567, invoice_items.invoice_id
     assert_equal 5000, invoice_items.quantity
-    assert_equal BigDecimal.new("80000").to_i/100, invoice_items.unit_price
+    assert_equal BigDecimal.new("80000").to_i, invoice_items.unit_price
     assert_equal "09:00", invoice_items.created_at
     assert_equal "12:08", invoice_items.updated_at
   end
