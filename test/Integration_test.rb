@@ -3,26 +3,24 @@ require '../lib/sales_engine'# ~> Errno::ENOENT: No such file or directory @ rb_
 
 class IntegrationTest < Minitest::Test
 
-  def initialize
+  def setup
     @customer_data     = CSVHandler.open_csv("../data/fixtures/customers.csv")
     @invoice_data      = CSVHandler.open_csv('../data/fixtures/invoices.csv')
     @invoice_item_data = CSVHandler.open_csv('../data/fixtures/invoice_items.csv')
     @item_data         = CSVHandler.open_csv('../data/fixtures/items.csv')
     @merchant_data     = CSVHandler.open_csv('../data/fixtures/merchants.csv')
     @transaction_data  = CSVHandler.open_csv('../data/fixtures/transactions.csv')
-  end
-
-  def startup
     @customers_repository     = CustomersRepository.build_customers(@customer_data,self)
     @invoices_repository      = InvoicesRepository.build_invoices(@invoice_data,self)
     @invoice_items_repository = InvoiceItemsRepository.build_invoice_items(@invoice_item_data,self)
     @transactions_repository  = TransactionsRepository.build_transactions(@transaction_data,self)
     @merchants_repository     = MerchantsRepository.build_merchants(@merchant_data,self)
     @items_repository         = ItemsRepository.build_items(@item_data,self)
+    @engine = SalesEngine.new(File.join(__dir__, '..', 'data', 'fixtures'))
   end
 
   def test_a_sales_engine_can_be_instantiated
-      assert SalesEngine.new
+    assert @engine.kind_of?(SalesEngine)
   end
 
 #tests that sales engines talks to repositories
@@ -58,11 +56,6 @@ class IntegrationTest < Minitest::Test
   end
 
   # test the relationship methods in sales engine
-
-
-  def test_items_returns_item_instances_per_merchant
-   @merchant.items.count
-  end
 
 # test here all the methods that are defined in the sales engine
 

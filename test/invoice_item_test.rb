@@ -6,8 +6,9 @@ class InvoiceItemTest < Minitest::Test
   def test_has_attributes
     data = {id: "146", item_id: "298", invoice_id: "894567", quantity: "5000",
     unit_price: "80000", created_at: "09:00", updated_at: "12:08"}
+    engine = SalesEngine.new
 
-    invoice_items = InvoiceItem.new(data,repo)
+    invoice_items = InvoiceItem.new(data,engine)
 
     assert_equal 146, invoice_items.id
     assert_equal 298, invoice_items.item_id

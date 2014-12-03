@@ -13,7 +13,7 @@ class Merchant
   end
 
   def items
-    engine.merchant_relationships
+    @engine.merchant_relationships
     # return each item under a certain merchant id
   end
 

@@ -8,7 +8,7 @@ class MerchantTest < Minitest::Test
     data = {id: 1, name: "Schroeder-Jerde", created_at: "2012-03-27 14:53:59 UTC",
       updated_at: "2012-03-27 14:53:59 UTC"}
     # @repository = Minitest::Mock.new
-    @merchant = Merchant.new(data,repo)
+    @merchant = Merchant.new(data,engine)
     @engine = SalesEngine.new
   end
 

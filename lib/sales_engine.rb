@@ -16,14 +16,20 @@ require_relative 'transaction'
 require_relative 'transactions_repository'
 require_relative 'CSV_handler'
 
-
 class SalesEngine
-  attr_reader :customers_repository,
-              :invoices_repository,
-              :invoice_items_repository,
-              :items_repository,
-              :merchants_repository,
-              :transactions_repository
+  attr_accessor :customers_repository,
+                :invoices_repository,
+                :invoice_items_repository,
+                :items_repository,
+                :merchants_repository,
+                :transactions_repository
+
+  alias_method :customer_repository, :customers_repository
+  alias_method :invoice_repository, :invoices_repository
+  alias_method :invoice_item_repository, :invoice_items_repository
+  alias_method :item_repository, :items_repository
+  alias_method :merchant_repository, :merchants_repository
+  alias_method :transaction_repository, :transactions_repository
 
   def initialize(dir=File.join(__dir__, '..', 'data'))
     @customer_data     = CSVHandler.open_csv("#{dir}/customers.csv")
@@ -35,12 +41,12 @@ class SalesEngine
   end
 
   def startup
-    @customers_repository     = CustomersRepository.build_customers(@customer_data,self)
-    @invoices_repository      = InvoicesRepository.build_invoices(@invoice_data,self)
-    @invoice_items_repository = InvoiceItemsRepository.build_invoice_items(@invoice_item_data,self)
-    @transactions_repository  = TransactionsRepository.build_transactions(@transaction_data,self)
-    @merchants_repository     = MerchantsRepository.build_merchants(@merchant_data,self)
-    @items_repository         = ItemsRepository.build_items(@item_data,self)
+    @customers_repository     ||= CustomersRepository.build_customers(@customer_data,self)
+    @invoices_repository      ||= InvoicesRepository.build_invoices(@invoice_data,self)
+    @invoice_items_repository ||= InvoiceItemsRepository.build_invoice_items(@invoice_item_data,self)
+    @transactions_repository  ||= TransactionsRepository.build_transactions(@transaction_data,self)
+    @merchants_repository     ||= MerchantsRepository.build_merchants(@merchant_data,self)
+    @items_repository         ||= ItemsRepository.build_items(@item_data,self)
   end
 
   def merchant_relationships
@@ -64,7 +70,6 @@ class SalesEngine
       invoice_item.invoice    = @invoices_repository.find_by_attribute(invoice_id, id)
     end
   end
-
 
   def invoice_relationships
     @invoices_repository.all.each do |transaction|
@@ -103,7 +108,7 @@ class SalesEngine
 end
 
 
-
-
-engine = SalesEngine.new
-engine.startup
+#
+#
+# engine = SalesEngine.new
+# engine.startup

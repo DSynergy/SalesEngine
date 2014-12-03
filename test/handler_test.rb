@@ -9,7 +9,7 @@ class HandlerTest < Minitest::Test
   end
 
   def test_it_can_load_a_repo
-    assert_equal 25, @customers.split.size
+    assert_equal 24, @customers.count
   end
 
 end

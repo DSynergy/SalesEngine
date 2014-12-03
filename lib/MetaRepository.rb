@@ -2,7 +2,6 @@ require_relative 'sales_engine'
 
 class MetaRepository
 
-
   def initialize(entries, engine)
     @engine = engine
     @entries = entries
@@ -21,7 +20,7 @@ class MetaRepository
   end
 
   def find_by_attribute(attribute, criteria)
-    @entries.detect {|x| x[attribute.to_sym] == criteria}
+    @entries.detect {|x| x.public_send(attribute.to_sym) == criteria}
 
     #returns a single instance of an attribute which matches the match parameter - case insensisitive
     # For instance, customer_repository.find_by_first_name("Mary") could find a Customer with the first name attribute "Mary" or "mary" but not "Mary Ellen"
@@ -39,7 +38,7 @@ class MetaRepository
   end
 
   def find_all_by_attribute(attribute, criteria)
-    @entries.select {|x| x[attribute.to_sym] == criteria}
+    @entries.select {|x| x.public_send(attribute.to_sym) == criteria}
     # returns a collection of all matched by attribute. No match returns an empty array
   end
 

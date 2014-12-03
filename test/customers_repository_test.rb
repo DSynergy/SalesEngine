@@ -1,5 +1,5 @@
 require_relative 'test_helper'
-require'../lib/sales_engine'
+require_relative '../lib/sales_engine'
 
 class CustomersRepositoryTest < Minitest::Test
 
@@ -18,9 +18,12 @@ class CustomersRepositoryTest < Minitest::Test
   end
 
   def test_it_returns_a_random_customer
-    random_customer1 = @customers_repository.customers.random
-    random_customer2 = @customers_repository.customers.random
-    refute random_customer1 == random_customer2
+    count = 10.times.count do |i|
+      random_customer1 = @customers_repository.random
+      random_customer2 = @customers_repository.random
+      random_customer1 == random_customer2
+    end
+    assert count < 2
   end
 
   def test_finds_customer_by_first_name
