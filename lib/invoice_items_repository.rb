@@ -2,7 +2,7 @@ require_relative 'MetaRepository'
 require_relative 'sales_engine'
 
 class InvoiceItemsRepository < MetaRepository
-  attr_reader :engine
+  attr_reader :engine, :entries
 
   def inspect
     "#<#{self.class} #{@invoice_items.size} rows>"
@@ -23,8 +23,8 @@ class InvoiceItemsRepository < MetaRepository
     find_by_attribute(:id, id)
   end
 
-  def find_by_item_id(id)
-    find_by_attribute(:item_id, id)
+  def find_by_item_id(itemid)
+    find_by_attribute(:item_id, itemid)
   end
 
   def find_all_by_quantity(quantity)

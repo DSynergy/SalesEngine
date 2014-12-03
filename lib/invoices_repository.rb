@@ -2,7 +2,7 @@ require_relative 'sales_engine'
 require_relative 'MetaRepository'
 
 class InvoicesRepository < MetaRepository
-  attr_reader :engine
+  attr_reader :engine, :entries
 
   def inspect
     "#<#{self.class} #{@invoices.size} rows>"
