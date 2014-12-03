@@ -1,5 +1,6 @@
 require_relative 'test_helper'
 require '../lib/sales_engine'
+require 'bigdecimal'
 
 class InvoiceItemsRepoTest < Minitest::Test
 
@@ -28,7 +29,7 @@ class InvoiceItemsRepoTest < Minitest::Test
 
   def test_it_can_find_invoice_items_by_item_id
     result = @invoice_items_repository.find_by_item_id(523)
-    assert_equal 348, result.unit_price
+    assert_equal BigDecimal.new(34873), result.unit_price
     #Our test passes as compared to spec harness. This corectly finds the first 523 id item
   end
 

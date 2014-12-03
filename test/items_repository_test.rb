@@ -1,5 +1,6 @@
 require_relative 'test_helper'
 require '../lib/sales_engine'
+require 'bigdecimal'
 
 class ItemsRepositoryTest < Minitest::Test
 
@@ -33,7 +34,8 @@ class ItemsRepositoryTest < Minitest::Test
   end
 
   def test_it_can_find_an_item_by_unit_price
-    result = @items_repository.find_by_unit_price(67076)
+    price = BigDecimal.new(67076)
+    result = @items_repository.find_by_unit_price(price)
     assert_equal "Item Autem Minima", result.name
   end
 
