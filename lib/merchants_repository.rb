@@ -31,6 +31,10 @@ class MerchantsRepository < MetaRepository
     find_by_attribute(:name, name)
   end
 
+  def find_all_by_name(name)
+    find_all_by_attribute(:name, name)
+  end
+
 end
 
 
