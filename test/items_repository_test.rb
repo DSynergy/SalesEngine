@@ -9,12 +9,12 @@ class ItemsRepositoryTest < Minitest::Test
   end
 
   def test_it_loaded_fixtures
-    assert_equal 24, @items_repository.items.length
+    assert_equal 24, @items_repository.items.count
   end
 
   def test_it_returns_a_random_item
-    random_item1 = @items_repository.items.random
-    random_item2 = @items_repository.items.random
+    random_item1 = @items_repository.random
+    random_item2 = @items_repository.random
     refute random_item1 == random_item2
   end
 
@@ -25,7 +25,7 @@ class ItemsRepositoryTest < Minitest::Test
 
   def test_it_can_find_all_items_by_merchant_id
     result = @items_repository.find_all_by_merchant_id(2)
-    assert_equal 10, result_count
+    assert_equal 9, result.count
   end
 
   def test_it_finds_items_by_name

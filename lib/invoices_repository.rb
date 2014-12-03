@@ -2,7 +2,7 @@ require_relative 'sales_engine'
 require_relative 'MetaRepository'
 
 class InvoicesRepository < MetaRepository
-  attr_reader :invoices, :engine
+  attr_reader :engine
 
   def inspect
     "#<#{self.class} #{@invoices.size} rows>"
@@ -15,6 +15,25 @@ class InvoicesRepository < MetaRepository
     self.new(invoice_objects,engine)
   end
 
+  def invoices
+    @entries
+  end
+
+  def find_by_id(id)
+    find_by_attribute(:id, id)
+  end
+
+  def find_all_by_customer_id(id)
+    find_all_by_attribute(:customer_id, id)
+  end
+
+  def find_all_by_status(status)
+    find_all_by_attribute(:status, status)
+  end
+
+  def random
+    @engine.sample
+  end
 
   def transactions
     @engine.invoice_relationships # returns a collection of associated Transaction instances

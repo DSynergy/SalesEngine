@@ -9,7 +9,7 @@ class InvoicesRepositoryTest < Minitest::Test
   end
 
   def test_it_can_load_invoices
-    assert_equal 24, @invoices_repository.invoices.length
+    assert_equal 24, @invoices_repository.invoices.count
   end
 
   def test_it_has_more_than_seven_invoices
@@ -17,8 +17,8 @@ class InvoicesRepositoryTest < Minitest::Test
   end
 
   def test_it_returns_random_invoice
-    random_invoice1 = @invoices_repository.invoices.random
-    random_invoice2 = @invoices_repository.invoices.random
+    random_invoice1 = @invoices_repository.random
+    random_invoice2 = @invoices_repository.random
     refute random_invoice1 = random_invoice2
   end
 

@@ -15,7 +15,7 @@ class InvoiceItemsRepoTest < Minitest::Test
   def test_it_returns_a_random_invoice_item
     random_invoice_item1 = @invoice_items_repository.random
     random_invoice_item2 = @invoice_items_repository.random
-    refute random_invoice_item1 == random_invoice_item2, "you fail this 1/24 of the time: unluck you"
+    refute random_invoice_item1 == random_invoice_item2, "you fail this 1/24 of the time: unlucky you"
   end
 
   def test_it_can_find_invoice_items_by_id
