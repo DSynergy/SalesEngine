@@ -4,96 +4,93 @@ require 'bigdecimal'
 
 class RelationshipTest < Minitest::Test
 
+  def setup
+    @engine = SalesEngine.new
+  end
+
   Merchant
 
-  def test_returns_item_instances_associated_with_merchant_for_product
-    merchant_relationships.
+  def test_returns_item_instances_associated_with_merchant_for_product()
+    @engine.merchant_relationship_items.find_by_name(:name)
+    assert_equal "Kirlin, Jakubowski and Smitham", merchant.name
+    engine.merchant_relationship_items.find_by_attribute(:id)
+    assert_equal 76, merchant.id
   end
 
   def test_invoices_returns_invoice_instances_associated_with_merchant
-
+    engine.merchant_relationship_invoices.find_by_attribute(:id)
+    assert_equal 593, customer.invoices.id
   end
-
-  23) SalesEngine merchants Relationships #items has the correct number of them
-  Failure/Error: expect(merchant.items.size).to eq 33
-  NoMethodError:
-  undefined method `all' for nil:NilClass
-  # /Users/edmac/Turing/sales_engine/lib/merchant.rb:21:in `merchant_relationships'
-  # /Users/edmac/Turing/sales_engine/lib/merchant.rb:16:in `items'
-  # ./spec/merchant_spec.rb:39:in `block (4 levels) in <top (required)>'
-
-  24) SalesEngine merchants Relationships #items includes a known item
-  Failure/Error: expect(merchant.items.map &:name).to include 'Item Consequatur Odit'
-  NoMethodError:
-  undefined method `all' for nil:NilClass
-  # /Users/edmac/Turing/sales_engine/lib/merchant.rb:21:in `merchant_relationships'
-  # /Users/edmac/Turing/sales_engine/lib/merchant.rb:16:in `items'
-  # ./spec/merchant_spec.rb:43:in `block (4 levels) in <top (required)>'
-
-  25) SalesEngine merchants Relationships #invoices has the correct number of them
-  Failure/Error: expect(merchant.invoices.size).to eq 43
-  NoMethodError:
-  undefined method `invoices' for #<Merchant:0x007fa82e193a88>
-  # ./spec/merchant_spec.rb:49:in `block (4 levels) in <top (required)>'
-
-  26) SalesEngine merchants Relationships #invoices has a shipped invoice for a specific customer
-  Failure/Error: invoice = merchant.invoices.find {|i| i.customer.last_name == 'Block' }
-  NoMethodError:
-  undefined method `invoices' for #<Merchant:0x007fa82e193a88>
-  # ./spec/merchant_spec.rb:53:in `block (4 levels) in <top (required)>'
 
   Invoice
 
   def test_transactions_returns_collection_of_transaction_instances
-
+    engine.invoice_repository.find_by_id 1002
+    assert_equal 1, invoice.transactions.size # count
   end
 
   def test_invoice_items_return_associated_invoice_item_instances
-
+    engine.invoice_item_relationships_invoice.find_by_id 1326
+    assert_equal 'Item Accusamus Officia', items.name
   end
 
   def test_items_returns_collection_of_items_by_way_of_invoice_item
-
+    engine.invoice_repository.find_by_id 1002
+    invoice_item_names = invoice.invoice_items.map { |ii| ii.item.name }
+    assert_equal 'Item Accusamus Officia', invoice_item_names
   end
 
   def test_customer_returns_instance_of_customer_class_associated_with_invoice
-
+    engine.invoice_repository.find_by_id 1002
+      assert_equal "Eric", invoice.customer.first_name        # His ID is 196 within customer.csv
+      assert_equal "Bergnaum", invoice.customer.last_name
   end
 
   def test_merchant_returns_merchant_class_instance_with_invoices
-
+    assert_equal 3, invoice.invoice_items.size
   end
 
   InvoiceItem
 
   def test_invoice_returns_invoice_instances_with_invoice_items
-
+    engine.invoice_item_relationships_item.find_by_id 16934
+    assert_equal "Item Cupiditate Magni", invoice_item.item.name
   end
 
   def test_item_returns_instance_of_item_with_invoice_item
-
+    engine.invoice_item_relationships_invoice.find_by_id 16934
+    assert_equal "Item Cupiditate Magni", invoice_item.item.name
   end
 
   Item
 
-  def test_invoice_items_return_collection_of_invoice_items_associated_with_item
-
+  def test_invoice_items_return_invoice_items_associated_with_item
+    engine.item_repository.find_by_name "Item Saepe Ipsum"
+    assert_equal 449 , item.find_by_attribute(:id)
+    assert_equal 1144, item.invoice_id
   end
+  #449 is id in item,item id
+  # 1144 is invoice_id in inv_it.csv
 
   def test_return_instances_of_merchant_associated_with_item
-
+    assert_equal 23, item.merchant_id
+    assert_equal "Item Sed Voluptas", name
   end
 
   Transaction
 
   def test_returns_instance_of_invoice_associated_with_transaction
-
+    assert_equal 1138, engine.transaction_repository.find_by_id
+      invoice_customer = engine.customer_repository.find_by_id 192
+      expect(transaction.invoice.customer.first_name).to eq invoice_customer.first_name
   end
 
   Customer
 
   def test_returns_collection_of_invoices_associated_with_customer
-
+    @engine.customer_repository.find_by_id 999
+    assert_equal 7, customer.invoices.count
+    assert_equal 999, invoice.customer.id
   end
 
 end
