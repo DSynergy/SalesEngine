@@ -35,7 +35,7 @@ class InvoicesRepository < MetaRepository
     find_all_by_attribute(:customer_id, id)
   end
 
-
+end
 
 
   # Invoice Extension
@@ -47,8 +47,3 @@ class InvoicesRepository < MetaRepository
   # average_items(date) returns a BigDecimal of the average item count for each processed invoice for a single date
   #
   # NOTE: All BigDecimal objects should use two decimal places. "Processed invoice" refers to an invoice that has at least one successful transaction.
-  #
-
-
-
-end

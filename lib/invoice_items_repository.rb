@@ -23,8 +23,8 @@ class InvoiceItemsRepository < MetaRepository
     find_by_attribute(:id, id)
   end
 
-  def find_by_item_id(itemid)
-    find_by_attribute(:item_id, itemid)
+  def find_by_item_id(item_id)
+    find_by_attribute(:item_id, item_id)
   end
 
   def find_all_by_quantity(quantity)
@@ -34,14 +34,5 @@ class InvoiceItemsRepository < MetaRepository
   def find_all_by_invoice_id(id)
     find_all_by_attribute(:invoice_id, id)
   end
-
-  def invoice
-    @engine.invoice_item_relationships # returns an instance of Invoice associated with this object
-  end
-
-  def item
-    @engine.invoice_item_relationships # returns an instance of Item associated with this object
-  end
-
 
 end

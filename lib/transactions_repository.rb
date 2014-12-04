@@ -20,7 +20,7 @@ class TransactionsRepository < MetaRepository
   end
 
   def find_by_id(id)
-    find_by_attribute(:id,id)
+    find_by_attribute(:id, id)
   end
 
   def find_all_by_result(result)

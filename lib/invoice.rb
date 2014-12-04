@@ -14,23 +14,28 @@ class Invoice
   end
 
   def transactions
-    @engine.invoice_relationships_transactions(self) # returns a collection of associated Transaction instances
+    @engine.invoice_relationships_transactions(self)
+    # returns a collection of associated Transaction instances
   end
 
   def invoice_items
-    @engine.invoice_relationships_invoice_item(self) # returns a collection of associated InvoiceItem instances
+    @engine.invoice_relationships_invoice_items(self)
+    # returns a collection of associated InvoiceItem instances
   end
 
   def items
-    @engine.invoice_realtionships_item_id(self) # returns a collection of associated Items by way of InvoiceItem objects
+    @engine.invoice_relationships_items(self)
+    # returns a collection of associated Items by way of InvoiceItem objects
   end
 
   def customer
-    @engine.invoice_relationships_by_customer_id(self) # returns an instance of Customer associated with this object
+    @engine.invoice_relationships_customers(self)
+    # returns an instance of Customer associated with this object
   end
 
   def merchant
-    @engine.invoice_relationships_merchant_id(self) # returns an instance of Merchant associated with this object
+    @engine.invoice_relationships_merchants(self) 
+    # returns an instance of Merchant associated with this object
   end
 
 end

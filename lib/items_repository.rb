@@ -39,6 +39,9 @@ class ItemsRepository < MetaRepository
     find_by_attribute(:unit_price, price)
   end
 
+end
+
+
   ####Business logic#####
   #
   # def most_revenue(x)
@@ -48,6 +51,3 @@ class ItemsRepository < MetaRepository
   # def most_items(x)
   #   # returns the top x item instances ranked by total number sold
   # end
-
-
-end

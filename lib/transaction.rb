@@ -15,7 +15,7 @@ class Transaction
   end
 
   def invoice
-    @engine.transactions_relationships_invoice(self)
+    @engine.transactions_relationships_invoices(self)
   end
 
 end

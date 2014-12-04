@@ -15,20 +15,22 @@ class InvoiceItem
   end
 
   def item
-    @engine.invoice_item_relationships_item(self)
+    @engine.invoice_item_relationships_items(self)
+    require 'pry'
+    binding.pry
   end
 
   def invoice
-    @engine.invoice_item_relationships_invoice(self)
+    @engine.invoice_item_relationships_invoices(self)
+    require 'pry'
+    binding.pry
   end
-
 
 end
 
 
-#
-#
-#
+# Business Logic
+
 # Invoice - Creating New Invoices & Related Objects
 #
 # Given a hash of inputs, you can create new invoices on the fly using this syntax:

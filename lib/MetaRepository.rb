@@ -12,7 +12,7 @@ class MetaRepository
   end
 
   def all
-    @entries # returns all instances of the repo
+    @entries
   end
 
   def random
@@ -20,11 +20,11 @@ class MetaRepository
   end
 
   def find_by_attribute(attribute, criteria)
-    @entries.detect {|x| x.public_send(attribute.to_sym) == criteria}
+    @entries.detect {|x| x.send(attribute.to_sym) == criteria}
   end
 
   def find_all_by_attribute(attribute, criteria)
-    @entries.select {|x| x.public_send(attribute.to_sym) == criteria}
+    @entries.select {|x| x.send(attribute.to_sym) == criteria}
   end
 
 end

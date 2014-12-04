@@ -37,6 +37,7 @@ class ItemsRepositoryTest < Minitest::Test
     price = BigDecimal.new(67076)
     result = @items_repository.find_by_unit_price(price)
     assert_equal "Item Autem Minima", result.name
+    #Our tests passes and correctly finds an item. Spec harness big decimal fail? or epic fail??
   end
 
   def test_it_finds_items_by_name
