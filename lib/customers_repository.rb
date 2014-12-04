@@ -38,12 +38,5 @@ class CustomersRepository < MetaRepository
   def find_by_id(id)
     find_by_attribute(:id, id)
   end
-
+  
 end
-
-
-  # Customer Extension
-  #
-  # most_items returns the Customer who has purchased the most items by quantity
-  # most_revenue returns the Customer who has generated the most total revenue
-  #

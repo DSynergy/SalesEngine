@@ -22,11 +22,5 @@ class Item
   def merchant
     @engine.item_relationships_merchants(self)
   end
-
+  
 end
-
-#
-#
-# def best_day
-#   # returns the date with the most sales for the given item using the invoice date
-# end

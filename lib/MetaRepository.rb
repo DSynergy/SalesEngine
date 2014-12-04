@@ -27,5 +27,4 @@ class MetaRepository
     @entries.select {|x| x.send(attribute.to_sym) == criteria}
   end
 
-
 end

@@ -107,6 +107,4 @@ class SalesEngine
     @invoices_repository.find_by_attribute(:id, transaction.invoice_id)
   end
 
-
-
 end

@@ -34,16 +34,5 @@ class InvoicesRepository < MetaRepository
   def find_all_by_customer_id(id)
     find_all_by_attribute(:customer_id, id)
   end
-
+  
 end
-
-
-  # Invoice Extension
-  #
-  # pending returns an array of Invoice instances for which there is no successful transaction
-  # average_revenue returns a BigDecimal of the average total for each processed invoice
-  # average_revenue(date) returns a BigDecimal of the average total for each processed invoice for a single date
-  # average_items returns a BigDecimal of the average item count for each processed invoice
-  # average_items(date) returns a BigDecimal of the average item count for each processed invoice for a single date
-  #
-  # NOTE: All BigDecimal objects should use two decimal places. "Processed invoice" refers to an invoice that has at least one successful transaction.
