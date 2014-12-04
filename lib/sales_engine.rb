@@ -84,7 +84,9 @@ class SalesEngine
   end
 
   def invoice_relationships_items(invoice)
-    @invoice_items_repository.find_all_by_attribute(:invoice_id, invoice.id).map {|n| @items_repository.find_by_attribute(:id, n.item_id)}
+    @invoice_items_repository.find_all_by_attribute(:invoice_id, invoice.id).map do |n|
+      @items_repository.find_by_attribute(:id, n.item_id)
+    end
   end
 
   def invoice_relationships_customers(invoice)

@@ -2,7 +2,14 @@ require_relative 'invoice_items_repository'
 require 'bigdecimal'
 
 class InvoiceItem
-  attr_reader :engine, :id, :item_id, :invoice_id, :quantity, :unit_price, :created_at, :updated_at
+  attr_reader :engine,
+              :id,
+              :item_id,
+              :invoice_id,
+              :quantity,
+              :unit_price,
+              :created_at,
+              :updated_at
 
   def initialize(data,engine)
     @id = data[:id].to_i
@@ -22,5 +29,4 @@ class InvoiceItem
   def invoice
     @engine.invoice_item_relationships_invoices(self)
   end
-  
 end

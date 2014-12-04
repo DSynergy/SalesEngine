@@ -3,8 +3,8 @@ require_relative '../lib/sales_engine'
 
 class CustomersRepositoryTest < Minitest::Test
 
-  def setup
-    @customer_data         = CSVHandler.open_csv("../data/fixtures/customers.csv")
+  def setup(dir=File.join(__dir__, '..', 'data'))
+    @customer_data     = CSVHandler.open_csv("#{dir}/fixtures/customers.csv")
     @customers_repository  = CustomersRepository.build_customers(@customer_data,self)
   end
 

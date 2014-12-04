@@ -34,5 +34,4 @@ class InvoicesRepository < MetaRepository
   def find_all_by_customer_id(id)
     find_all_by_attribute(:customer_id, id)
   end
-  
 end

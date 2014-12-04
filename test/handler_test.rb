@@ -1,11 +1,11 @@
 require_relative 'test_helper'
-require'../lib/sales_engine'
+require_relative '../lib/sales_engine'
 
 class HandlerTest < Minitest::Test
   attr_reader :customers
 
-  def setup
-    @customers = CSV.open("../data/fixtures/customers.csv", headers: true, header_converters: :symbol )
+  def setup(dir=File.join(__dir__, '..', 'data'))
+    @customers = CSV.open("#{dir}/fixtures/customers.csv", headers: true, header_converters: :symbol )
   end
 
   def test_it_can_load_a_repo

@@ -1,15 +1,15 @@
 require_relative 'test_helper'
-require '../lib/sales_engine'
+require_relative '../lib/sales_engine'
 
 class IntegrationTest < Minitest::Test
 
-  def setup
-    @customer_data            = CSVHandler.open_csv("../data/fixtures/customers.csv")
-    @invoice_data             = CSVHandler.open_csv('../data/fixtures/invoices.csv')
-    @invoice_item_data        = CSVHandler.open_csv('../data/fixtures/invoice_items.csv')
-    @item_data                = CSVHandler.open_csv('../data/fixtures/items.csv')
-    @merchant_data            = CSVHandler.open_csv('../data/fixtures/merchants.csv')
-    @transaction_data         = CSVHandler.open_csv('../data/fixtures/transactions.csv')
+  def setup(dir=File.join(__dir__, '..', 'data'))
+    @customer_data     = CSVHandler.open_csv("#{dir}/fixtures/customers.csv")
+    @invoice_data      = CSVHandler.open_csv("#{dir}/fixtures/invoices.csv")
+    @invoice_item_data = CSVHandler.open_csv("#{dir}/fixtures/invoice_items.csv")
+    @item_data         = CSVHandler.open_csv("#{dir}/fixtures/items.csv")
+    @merchant_data     = CSVHandler.open_csv("#{dir}/fixtures/merchants.csv")
+    @transaction_data  = CSVHandler.open_csv("#{dir}/fixtures/transactions.csv")
     @customers_repository     = CustomersRepository.build_customers(@customer_data,self)
     @invoices_repository      = InvoicesRepository.build_invoices(@invoice_data,self)
     @invoice_items_repository = InvoiceItemsRepository.build_invoice_items(@invoice_item_data,self)

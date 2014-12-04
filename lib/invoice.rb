@@ -1,7 +1,13 @@
 require_relative 'invoices_repository'
 
 class Invoice
-  attr_reader :engine, :id, :merchant_id, :customer_id, :created_at, :updated_at, :status
+  attr_reader :engine,
+              :id,
+              :merchant_id,
+              :customer_id,
+              :created_at,
+              :updated_at,
+              :status
 
   def initialize(data,engine)
     @id = data[:id].to_i

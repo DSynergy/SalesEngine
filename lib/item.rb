@@ -2,7 +2,14 @@ require_relative 'items_repository'
 require 'bigdecimal'
 
 class Item
-  attr_reader :engine, :id, :name, :description, :merchant_id, :unit_price, :created_at, :updated_at
+  attr_reader :engine,
+              :id,
+              :name,
+              :description,
+              :merchant_id,
+              :unit_price,
+              :created_at,
+              :updated_at
 
   def initialize(data,engine)
     @id = data[:id].to_i
@@ -22,5 +29,4 @@ class Item
   def merchant
     @engine.item_relationships_merchants(self)
   end
-  
 end

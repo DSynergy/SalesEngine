@@ -1,10 +1,10 @@
 require_relative 'test_helper'
-require '../lib/sales_engine'
+require_relative '../lib/sales_engine'
 
 class MerchantsRepositoryTest < Minitest::Test
 
-  def setup
-    @merchant_data        = CSVHandler.open_csv("../data/fixtures/merchants.csv")
+  def setup(dir=File.join(__dir__, '..', 'data'))
+    @merchant_data        = CSVHandler.open_csv("#{dir}/fixtures/merchants.csv")
     @merchants_repository = MerchantsRepository.build_merchants(@merchant_data,self)
   end
 

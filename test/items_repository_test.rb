@@ -1,11 +1,11 @@
 require_relative 'test_helper'
-require '../lib/sales_engine'
+require_relative '../lib/sales_engine'
 require 'bigdecimal'
 
 class ItemsRepositoryTest < Minitest::Test
 
-  def setup
-    @item_data        = CSVHandler.open_csv("../data/fixtures/items.csv")
+  def setup(dir=File.join(__dir__, '..', 'data'))
+    @item_data        = CSVHandler.open_csv("#{dir}/fixtures/items.csv")
     @items_repository = ItemsRepository.build_items(@item_data,self)
   end
 

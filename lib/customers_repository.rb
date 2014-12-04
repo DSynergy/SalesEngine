@@ -38,5 +38,4 @@ class CustomersRepository < MetaRepository
   def find_by_id(id)
     find_by_attribute(:id, id)
   end
-  
 end

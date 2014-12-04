@@ -38,5 +38,4 @@ class ItemsRepository < MetaRepository
   def find_by_unit_price(price)
     find_by_attribute(:unit_price, (price * 100))
   end
-
 end
