@@ -35,4 +35,5 @@ class InvoiceItemsRepository < MetaRepository
     find_all_by_attribute(:invoice_id, id)
   end
 
+
 end

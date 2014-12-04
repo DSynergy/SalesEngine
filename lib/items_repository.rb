@@ -10,9 +10,9 @@ class ItemsRepository < MetaRepository
 
   def self.build_items(data,engine)
     item_objects = data.map do |row|
-      Item.new(row,self)
+      Item.new(row,engine)
     end
-    self.new(item_objects,self)
+    self.new(item_objects,engine)
   end
 
   def items
@@ -36,7 +36,7 @@ class ItemsRepository < MetaRepository
   end
 
   def find_by_unit_price(price)
-    find_by_attribute(:unit_price, price)
+    find_by_attribute(:unit_price, (price * 100))
   end
 
 end

@@ -34,7 +34,7 @@ class Invoice
   end
 
   def merchant
-    @engine.invoice_relationships_merchants(self) 
+    @engine.invoice_relationships_merchants(self)
     # returns an instance of Merchant associated with this object
   end
 

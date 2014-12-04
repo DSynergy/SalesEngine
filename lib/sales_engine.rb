@@ -68,11 +68,11 @@ class SalesEngine
   end
 
   def invoice_item_relationships_items(invoice_item)
-    @items_repository.find_by_attribute(:id, invoice_item.id)
+    @items_repository.find_by_attribute(:id, invoice_item.item_id)
   end
 
   def invoice_item_relationships_invoices(invoice_item)
-    @invoices_repository.find_by_attribute(:id, invoice.id)
+    @invoices_repository.find_by_attribute(:id, invoice_item.invoice_id)
   end
 
   def invoice_relationships_transactions(invoice)
@@ -84,15 +84,15 @@ class SalesEngine
   end
 
   def invoice_relationships_items(invoice)
-    @items_repository.find_all_by_attribute(:id, item_id.id)
+    @invoice_items_repository.find_all_by_attribute(:invoice_id, invoice.id).map {|n| @items_repository.find_by_attribute(:id, n.item_id)}
   end
 
   def invoice_relationships_customers(invoice)
-    @customers_repository.find_by_attribute(:id, customer.id)
+    @customers_repository.find_by_attribute(:id, invoice.customer_id)
   end
 
   def invoice_relationships_merchants(invoice)
-    @merchants_repository.find_by_attribute(:id, merchant_id.id)
+    @merchants_repository.find_by_attribute(:id, invoice.merchant_id)
   end
 
   def item_relationships_invoice_items(item)
@@ -100,11 +100,13 @@ class SalesEngine
   end
 
   def item_relationships_merchants(item)
-    @merchants_repository.find_by_attribute(:id, merchant_id.id)
+    @merchants_repository.find_by_attribute(:id, item.merchant_id)
   end
 
   def transactions_relationships_invoices(transaction)
-    @invoices_repository.find_by_attribute(:id, invoice_id.id)
+    @invoices_repository.find_by_attribute(:id, transaction.invoice_id)
   end
+
+
 
 end
