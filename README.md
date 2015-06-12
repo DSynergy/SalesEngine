@@ -1,23 +1,19 @@
 # Sales Engine
 
-(insert project completion goals for first check-in here)
+An implementation of ActiveRecord through pure Ruby to better understand Rails. This was a two perosn project, 4 weeks into our coding experience. It used CSVs and required us to manually build out relations with no database support.
 
-(insert project completion goals for second check-in here)
+Full info: http://tutorials.jumpstartlab.com/projects/sales_engine.html
 
-# Check-in Rubrics
+Project Overview
+Goals
 
-### Feature Delivery Rubric
+    Use tests to drive both the design and implementation of code
+    Use test fixtures instead of actual data when testing
+    Build a complex system of relationships using multiple interacting classes
+    Demonstrate the DRY principle with modules and/or duck typing
+    Separate parsing and data loading logic from business logic
+    Use memoization to improve performance
 
-You’ll be graded on each of the criteria below with a score of (1) well below expectations, (2) below expectations, (3) as expected, (4) better than expected.
+Abstract
 
-* Completion: did you deliver what you committed to build?
-
-* Organization: did you use your project management tool to keep the project organized?
-
-* Progress: are you on track to finish the project on time? Will/does the end product realize the vision of the concept?
-
-### Technical Quality Rubric
-
-* Test-Driven Development: (1) disregard for testing, (2) gaps in test usage/coverage/design, (3) adequate testing, (4) exceptional use of testing
-
-* Code Quality: (1) poor factoring and understanding of MVC, (2) some gaps in code quality / application of MVC, (3) solid code quality and pushing logic down the stack, (4) exceptionally well factored code
+Let’s write a data reporting tool that manipulates and reports on merchant transactional data.
